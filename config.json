@@ -1,0 +1,30 @@
+{
+  "name": "Data Opt-Out Tool",
+  "namespace": "Nottingham\\DataOptOutTool",
+  "description": "Data Opt-Out Tool for REDCap",
+  "framework-version": 16,
+  "authors": [
+    {
+      "name": "Nicholas Russell",
+      "email": "nicholas.russell@nottingham.ac.uk",
+      "institution": "University of Nottingham"
+    }
+  ],
+  "project-settings": [
+    {
+      "key": "process-roles",
+      "name": "Process Roles",
+      "type": "user-role-list",
+      "repeatable": true
+    }
+  ],
+  "links": {
+    "project": [
+      {
+        "name": "Process Opt-Outs",
+        "icon": "fas fa-table",
+        "url": "process.php"
+      }
+    ]
+  }
+}
