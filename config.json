@@ -1,7 +1,7 @@
 {
   "name": "Data Opt-Out Tool",
   "namespace": "Nottingham\\DataOptOutTool",
-  "description": "Data Opt-Out Tool for REDCap",
+  "description": "Removes rows from a CSV file for participants/patients who have opted out of data collection. Filtering happens entirely on the user's device.",
   "framework-version": 16,
   "authors": [
     {
@@ -15,16 +15,97 @@
       "key": "process-roles",
       "name": "Process Roles",
       "type": "user-role-list",
-      "repeatable": true
+      "repeatable": true,
+      "required": true,
+      "super-users-only": true
+    },
+    {
+      "key": "upload-target",
+      "name": "Upload Target",
+      "type": "sub_settings",
+      "repeatable": false,
+      "required": true,
+      "super-users-only": true,
+      "sub_settings": [
+        {
+          "key": "upload-mode",
+          "name": "Repeat type",
+          "type": "radio",
+          "required": true,
+          "choices": [
+            { "value": "classic-form",       "name": "Classic: repeating form" },
+            { "value": "longitudinal-event", "name": "Longitudinal: repeating event" },
+            { "value": "longitudinal-form",  "name": "Longitudinal: repeating form" }
+          ]
+        },
+
+        {
+          "key": "upload-event",
+          "name": "Repeating event unique name",
+          "type": "text",
+          "required": true,
+          "branchingLogic": {
+            "type": "or",
+            "conditions": [
+              { "field": "upload-mode", "value": "longitudinal-event" },
+              { "field": "upload-mode", "value": "longitudinal-form" }
+            ]
+          }
+        },
+        {
+          "key": "upload-form",
+          "name": "Repeating form name",
+          "type": "text",
+          "required": true,
+          "branchingLogic": {
+            "type": "or",
+            "conditions": [
+              { "field": "upload-mode", "value": "classic-form" },
+              { "field": "upload-mode", "value": "longitudinal-form" }
+            ]
+          }
+        },
+        {
+          "key": "upload-field",
+          "name": "Field",
+          "type": "field-list",
+          "field-type": "file",
+          "required": true,
+          "branchingLogic": {
+            "type": "or",
+            "conditions": [
+              { "field": "upload-mode", "value": "classic-form" },
+              { "field": "upload-mode", "value": "longitudinal-event" },
+              { "field": "upload-mode", "value": "longitudinal-form" }
+            ]
+          }
+        },
+        {
+          "key": "upload-record",
+          "name": "Record ID",
+          "type": "text",
+          "required": true,
+          "branchingLogic": {
+            "type": "or",
+            "conditions": [
+              { "field": "upload-mode", "value": "classic-form" },
+              { "field": "upload-mode", "value": "longitudinal-event" },
+              { "field": "upload-mode", "value": "longitudinal-form" }
+            ]
+          }
+        }
+      ]
     }
   ],
   "links": {
     "project": [
       {
         "name": "Process Opt-Outs",
-        "icon": "fas fa-table",
-        "url": "process.php"
+        "icon": "fas fa-filter",
+        "url": "process.php",
+        "show-header-and-footer": true
       }
     ]
-  }
+  },
+  "auth-ajax-actions": ["upload-file"]
 }
