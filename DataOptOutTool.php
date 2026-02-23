@@ -13,10 +13,10 @@ class DataOptOutTool extends AbstractExternalModule
      * @param string $action The AJAX action name.
      * @param array $payload Associative array of data sent with the request.
      * @param int $project_id Current REDCap project ID.
-     * @param string $group_id Data Access Group ID for the current user (or 'admin').
+     * @param string $group_id Data Access Group ID for the current user.
      * @return array{success: bool, error?: string}
      */
-    public function redcap_module_ajax($action, $payload, $project_id, $record, $instrument, $event_id, $repeat_instance, $survey_hash, $response_id, $survey_queue_hash, $queue_id, $survey_mailing_id, $group_id)
+    public function redcap_module_ajax($action, $payload, $project_id, $record, $instrument, $event_id, $repeat_instance, $survey_hash, $response_id, $survey_queue_hash, $page, $page_full, $user_id, $group_id)
     {
         if (!$this->userIsAuthorised()) {
             return ['success' => false, 'error' => 'Access denied'];
@@ -85,6 +85,9 @@ class DataOptOutTool extends AbstractExternalModule
         $labelField = $this->getProjectSetting('record-label-field');
         $filterByLabel = $this->getProjectSetting('record-label-filter');
 
+        $rights  = $this->getUser()->getRights($project_id);
+        $groupId = is_numeric($rights['group_id'] ?? null) ? (int)$rights['group_id'] : null;
+
         $fields = [REDCap::getRecordIdField()];
         if (!empty($labelField)) {
             $fields[] = $labelField;
@@ -92,7 +95,8 @@ class DataOptOutTool extends AbstractExternalModule
 
         $params = [
             'project_id' => $project_id,
-            'fields' => $fields,
+            'fields'     => $fields,
+            'groups'     => $groupId,
         ];
 
         if (!empty($labelField) && $filterByLabel) {
