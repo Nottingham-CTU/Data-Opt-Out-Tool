@@ -73,12 +73,18 @@ $jsModuleName = $module->getJavascriptModuleObjectName();
     <p>
         <a id="doot-preview-link" href="#" download>Preview / download processed file</a>
     </p>
-    <button id="doot-step4-back" class="btn btn-secondary me-2">&larr; Back</button>
+    <div class="mb-3" id="doot-record-section">
+        <label for="doot-record-select" class="form-label">Upload to record</label>
+        <select id="doot-record-select" class="form-select" style="max-width:20rem;">
+            <option value="">Loading records&hellip;</option>
+        </select>
+    </div>
     <p class="text-muted small mb-2">
         <i class="fas fa-cloud-upload-alt me-1"></i>
         Clicking <strong>Upload to REDCap</strong> will send the processed file to the server.
     </p>
-    <button id="doot-upload-btn" class="btn btn-success">Upload to REDCap</button>
+    <button id="doot-step4-back" class="btn btn-secondary me-2">&larr; Back</button>
+    <button id="doot-upload-btn" class="btn btn-success" disabled>Upload to REDCap</button>
     <div id="doot-upload-progress" class="mt-2" style="display:none;">
         <span class="spinner-border spinner-border-sm" role="status"></span>
         Uploading&hellip;

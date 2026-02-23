@@ -20,6 +20,18 @@
       "super-users-only": true
     },
     {
+      "key": "record-label-field",
+      "name": "Record label field",
+      "required": false,
+      "type": "text"
+    },
+    {
+      "key": "record-label-filter",
+      "name": "Filter records by label field",
+      "required": false,
+      "type": "checkbox"
+    },
+    {
       "key": "upload-target",
       "name": "Upload Target",
       "type": "sub_settings",
@@ -79,20 +91,6 @@
               { "field": "upload-mode", "value": "longitudinal-form" }
             ]
           }
-        },
-        {
-          "key": "upload-record",
-          "name": "Record ID",
-          "type": "text",
-          "required": true,
-          "branchingLogic": {
-            "type": "or",
-            "conditions": [
-              { "field": "upload-mode", "value": "classic-form" },
-              { "field": "upload-mode", "value": "longitudinal-event" },
-              { "field": "upload-mode", "value": "longitudinal-form" }
-            ]
-          }
         }
       ]
     }
@@ -107,5 +105,5 @@
       }
     ]
   },
-  "auth-ajax-actions": ["upload-file"]
+  "auth-ajax-actions": ["upload-file", "get-records"]
 }

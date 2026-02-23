@@ -26,6 +26,10 @@ class DataOptOutTool extends AbstractExternalModule
             return $this->handleUploadFile($payload, $project_id, $group_id);
         }
 
+        if ($action === 'get-records') {
+            return $this->handleGetRecords($project_id);
+        }
+
         return ['success' => false, 'error' => 'Unknown action'];
     }
 
@@ -61,9 +65,66 @@ class DataOptOutTool extends AbstractExternalModule
     }
 
     /**
+     * Handles the `get-records` AJAX action.
+     *
+     * Returns all record IDs in the project (classic) or only those with data
+     * in the configured event (longitudinal), sorted alphabetically.
+     *
+     * @param int $project_id The REDCap project ID.
+     * @return array{success: bool, records?: string[], error?: string}
+     */
+    private function handleGetRecords($project_id)
+    {
+        $target = $this->getSubSettings('upload-target');
+        $uploadMode = $target[0]['upload-mode'] ?? null;
+
+        if (empty($uploadMode)) {
+            return ['success' => false, 'error' => 'Upload target not configured (missing Repeat type)'];
+        }
+
+        $labelField = $this->getProjectSetting('record-label-field');
+        $filterByLabel = $this->getProjectSetting('record-label-filter');
+
+        $fields = [REDCap::getRecordIdField()];
+        if (!empty($labelField)) {
+            $fields[] = $labelField;
+        }
+
+        $params = [
+            'project_id' => $project_id,
+            'fields' => $fields,
+        ];
+
+        if (!empty($labelField) && $filterByLabel) {
+            $params['filterLogic'] = "[{$labelField}] <> ''";
+        }
+
+        $data = REDCap::getData($params);
+
+        $recordIds = [];
+        $recordLabels = [];
+        foreach ($data as $recordId => $eventData) {
+            $recordIds[] = (string)$recordId;
+            if (!empty($labelField)) {
+                foreach ($eventData as $eventValues) {
+                    $val = $eventValues[$labelField] ?? '';
+                    if ($val !== '' && $val !== null) {
+                        $recordLabels[(string)$recordId] = (string)$val;
+                        break;
+                    }
+                }
+            }
+        }
+        $recordIds = array_unique($recordIds);
+        sort($recordIds);
+
+        return ['success' => true, 'records' => array_values($recordIds), 'labels' => $recordLabels];
+    }
+
+    /**
      * Handles the `upload-file` AJAX action.
      *
-     * @param array $payload Must contain `file_content` base64 string and `filename`.
+     * @param array $payload Must contain `file_content` base64 string, `filename`, and `record_id`.
      * @param int $project_id The REDCap project ID to save the file into.
      * @param string $group_id The current user's DAG ID, or 'admin'.
      * @return array{success: bool, error?: string, record?: string}
@@ -96,14 +157,17 @@ class DataOptOutTool extends AbstractExternalModule
         $target = $this->getSubSettings('upload-target');
         $uploadMode = $target[0]['upload-mode'] ?? null;
         $uploadField = $target[0]['upload-field'] ?? null;
-        $uploadRecord = $target[0]['upload-record'] ?? null;
         $uploadEvent = $target[0]['upload-event'] ?? null;
         $uploadForm = $target[0]['upload-form'] ?? null;
+
+        $uploadRecord = $payload['record_id'] ?? null;
+        if (empty($uploadRecord)) {
+            return ['success' => false, 'error' => 'No record ID provided'];
+        }
 
         $missing = [];
         if (empty($uploadMode)) $missing[] = 'Repeat type';
         if (empty($uploadField)) $missing[] = 'Upload Field';
-        if (empty($uploadRecord)) $missing[] = 'Upload Record ID';
         if (in_array($uploadMode, ['longitudinal-event', 'longitudinal-form'], true) && empty($uploadEvent)) {
             $missing[] = 'Repeating Event';
         }
@@ -121,7 +185,7 @@ class DataOptOutTool extends AbstractExternalModule
             'fields' => [REDCap::getRecordIdField()],
         ]);
         if (empty($existingRecord)) {
-            return ['success' => false, 'error' => 'Configured upload record does not exist'];
+            return ['success' => false, 'error' => 'Selected upload record does not exist'];
         }
 
         $tmpPath = $this->createTempFile();

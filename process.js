@@ -114,6 +114,7 @@ document.getElementById('doot-process-btn').addEventListener('click', () => {
     link.download        = filename;
     link.dataset.blobUrl = blobUrl;
 
+    fetchRecords();
     showStep(4);
 });
 
@@ -122,14 +123,19 @@ document.getElementById('doot-step4-back').addEventListener('click', () => {
     showStep(3);
 });
 
+document.getElementById('doot-record-select').addEventListener('change', function () {
+    document.getElementById('doot-upload-btn').disabled = this.value === '';
+});
+
 document.getElementById('doot-upload-btn').addEventListener('click', () => {
     const b64      = encodeToBase64(processedCsv);
     const filename = `${csvFilename.replace(/\.csv$/i, '')}_processed.csv`;
+    const recordId = document.getElementById('doot-record-select').value;
 
     document.getElementById('doot-upload-progress').style.display = '';
     document.getElementById('doot-upload-btn').disabled = true;
 
-    module.ajax('upload-file', { file_content: b64, filename: filename })
+    module.ajax('upload-file', { file_content: b64, filename: filename, record_id: recordId })
         .then(response => {
             document.getElementById('doot-upload-progress').style.display = 'none';
             document.getElementById('doot-upload-btn').disabled = false;
@@ -174,11 +180,40 @@ document.getElementById('doot-restart-btn').addEventListener('click', () => {
     document.getElementById('doot-id-column').innerHTML           = '';
     document.getElementById('doot-exclude').value                 = '';
     document.getElementById('doot-include').value                 = '';
+    document.getElementById('doot-record-select').innerHTML       = '<option value="">Loading records\u2026</option>';
 
     showStep(1);
 });
 
 // Helper functions
+
+/**
+ * Fetches project record IDs via AJAX and populates #doot-record-select.
+ * Disables the upload button until a record is chosen.
+ */
+async function fetchRecords() {
+    const select = document.getElementById('doot-record-select');
+    select.innerHTML = '<option value="">Loading records\u2026</option>';
+    document.getElementById('doot-upload-btn').disabled = true;
+
+    try {
+        const response = await module.ajax('get-records', {});
+        select.innerHTML = '<option value="">\u2014 select a record \u2014</option>';
+        if (response && response.success && response.records.length) {
+            response.records.forEach(id => {
+                const opt = document.createElement('option');
+                opt.value = id;
+                const label = response.labels && response.labels[id];
+                opt.textContent = label ? `${id} \u2013 ${label}` : id;
+                select.appendChild(opt);
+            });
+        } else {
+            select.innerHTML = '<option value="">No records found</option>';
+        }
+    } catch {
+        select.innerHTML = '<option value="">Failed to load records</option>';
+    }
+}
 
 /**
  * Shows the wizard step with the given number and hides all others.
