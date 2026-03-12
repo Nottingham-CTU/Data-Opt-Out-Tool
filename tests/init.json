@@ -1,0 +1,16 @@
+[
+	{
+		"action" : "module",
+		"source" : "this",
+		"name" : "data_opt_out_tool"
+	},
+	{
+		"action" : "selenium",
+		"file" : "init.py"
+	},
+	{
+		"action" : "external-save",
+		"url" : "[secret-1]",
+		"data" : {"name":"Data Opt Out Tool REDCap Module Functionality Testing.pdf","file":"[pdf-inst]","version":"[unit-version] / RC [redcap-version]"}
+	}
+]
