@@ -147,13 +147,13 @@ document.getElementById('doot-upload-btn').addEventListener('click', () => {
                     `Record: <strong>${escapeHtml(response.record)}</strong>.`;
                 showStep(5);
             } else {
-                alert(`Upload failed: ${escapeHtml((response && response.error) || 'Unknown error')}`);
+                alert(`Upload failed: ${(response && response.error) || 'Unknown error'}`);
             }
         })
         .catch(err => {
             document.getElementById('doot-upload-progress').style.display = 'none';
             document.getElementById('doot-upload-btn').disabled = false;
-            alert(`Upload error: ${escapeHtml(String(err))}`);
+            alert(`Upload error: ${String(err)}`);
         });
 });
 
