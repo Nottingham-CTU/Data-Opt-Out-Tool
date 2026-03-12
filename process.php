@@ -14,6 +14,11 @@ $jsModuleName = $module->getJavascriptModuleObjectName();
         <label for="doot-file-input" class="form-label fw-bold">Select CSV file</label>
         <input type="file" id="doot-file-input" class="form-control" accept=".csv,text/csv">
     </div>
+    <p class="text-muted small">
+        <i class="fas fa-lock me-1"></i>
+        Processing happens entirely on your device — no data is sent to REDCap until you
+        click <strong>Upload</strong> in the final step, after filtering is applied.
+    </p>
     <div id="doot-preview-section" style="display:none;">
         <div class="mt-2">
             <label for="doot-header-row" class="form-label fw-bold">Header row</label>
@@ -97,7 +102,8 @@ $jsModuleName = $module->getJavascriptModuleObjectName();
     <button id="doot-restart-btn" class="btn btn-primary">Process Another File</button>
 </div>
 
-<script>
+<script type="text/javascript">
+    $('#center').css('padding-right','20px')
     window.dootModule = <?= $jsModuleName ?>;
 </script>
-<script type="module" src="<?= $module->getUrl('process.js') ?>"></script>
+<script type="text/javascript" src="<?= $module->getUrl('process.js') ?>"></script>
