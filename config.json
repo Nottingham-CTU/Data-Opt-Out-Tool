@@ -53,7 +53,7 @@
 
         {
           "key": "upload-event",
-          "name": "Repeating event unique name",
+          "name": "Repeating event",
           "type": "text",
           "required": true,
           "branchingLogic": {
@@ -66,8 +66,8 @@
         },
         {
           "key": "upload-form",
-          "name": "Repeating form name",
-          "type": "text",
+          "name": "Repeating form",
+          "type": "form-list",
           "required": true,
           "branchingLogic": {
             "type": "or",

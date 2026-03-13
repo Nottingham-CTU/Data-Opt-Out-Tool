@@ -46,6 +46,41 @@ class DataOptOutTool extends AbstractExternalModule
     }
 
     /**
+     * Module framework hook: dynamically modify the module settings config.
+     *
+     * @param int $project_id Current REDCap project ID.
+     * @param array $link The settings config.
+     * @return array The modified settings config.
+     */
+    public function redcap_module_configuration_settings($project_id, $settings)
+    {
+        if ( $project_id !== null && REDCap::isLongitudinal() )
+        {
+            $listEventNames = REDCap::getEventNames( true );
+            foreach ( $settings as $i => $s )
+            {
+                if ( $s['key'] == 'upload-target' )
+                {
+                    foreach( $s['sub_settings'] as $j => $subS )
+                    {
+                        if ( $subS['key'] == 'upload-event' )
+                        {
+                            $settings[$i]['sub_settings'][$j]['type'] = 'dropdown';
+                            $choices = [];
+                            foreach ( $listEventNames as $eventName )
+                            {
+                                $choices[] = [ 'name' => $eventName, 'value' => $eventName ];
+                            }
+                            $settings[$i]['sub_settings'][$j]['choices'] = $choices;
+                        }
+                    }
+                }
+            }
+        }
+        return $settings;
+    }
+
+    /**
      * Returns true if the current user may access the module's page and AJAX endpoints.
      *
      * Admins are always authorized. For other users, access is granted when their
