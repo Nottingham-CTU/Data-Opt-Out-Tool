@@ -5,8 +5,12 @@
   "framework-version": 16,
   "authors": [
     {
+      "name": "Richard Dooley",
+      "email": "richard.dooley@nottingham.ac.uk",
+      "institution": "University of Nottingham"
+    },
+    {
       "name": "Nicholas Russell",
-      "email": "nicholas.russell@nottingham.ac.uk",
       "institution": "University of Nottingham"
     }
   ],
