@@ -81,6 +81,31 @@ class DataOptOutTool extends AbstractExternalModule
     }
 
     /**
+     * Provides extra validation of the module settings.
+     *
+     * @param array $settings The submitted settings.
+     * @return string|null The error message.
+     */
+    public function validateSettings( $settings )
+    {
+        if ( REDCap::isLongitudinal() )
+        {
+            if ( $settings['upload-mode'][0] == 'classic-form' )
+            {
+                return 'Classic repeat type selected, but project is longitudinal.';
+            }
+        }
+        else
+        {
+            if ( substr( $settings['upload-mode'][0], 0, 13 ) == 'longitudinal-' )
+            {
+                return 'Longitudinal repeat type selected, but project is classic.';
+            }
+        }
+        return null;
+    }
+
+    /**
      * Returns true if the current user may access the module's page and AJAX endpoints.
      *
      * Admins are always authorized. For other users, access is granted when their
