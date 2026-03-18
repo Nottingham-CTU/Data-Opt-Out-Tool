@@ -76,7 +76,7 @@ $jsModuleName = $module->getJavascriptModuleObjectName();
 <div id="doot-step-4" class="d-none">
     <div id="doot-results-msg" class="alert alert-info"></div>
     <p>
-        <a id="doot-preview-link" href="#" download>Preview / download processed file</a>
+        <a id="doot-preview-link" href="#" download>Preview / save processed file</a>
     </p>
     <div class="mb-3" id="doot-record-section">
         <label for="doot-record-select" class="form-label">Upload to record</label>
