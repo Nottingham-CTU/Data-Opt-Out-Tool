@@ -88,6 +88,12 @@ class DataOptOutTool extends AbstractExternalModule
      */
     public function validateSettings( $settings )
     {
+        // This doesn't apply to system settings.
+        if ( $this->getProjectId() === null )
+        {
+            return null;
+        }
+
         if ( REDCap::isLongitudinal() )
         {
             if ( $settings['upload-mode'][0] == 'classic-form' )
