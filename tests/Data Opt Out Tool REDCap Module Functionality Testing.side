@@ -136,12 +136,6 @@
           "id": "0fc55df1-ed21-474f-b7e1-cab86df36c33"
         },
         {
-          "command": "pause",
-          "target": "15000",
-          "value": "",
-          "id": "48be82a0-2cb9-4b22-b7d0-813dc25eb692"
-        },
-        {
           "command": "click",
           "target": "linkText=${_projtitle}",
           "value": "",
@@ -150,7 +144,7 @@
         {
           "command": "waitForElementPresent",
           "target": "id=south",
-          "value": "90000",
+          "value": "30000",
           "id": "4dfdbab1-3a9d-43b5-b342-37fd14252ce4"
         },
         {
@@ -1078,6 +1072,12 @@
           "id": "85d67b05-3c2c-42c1-bc57-aabbcfcdb7ea"
         },
         {
+          "command": "click",
+          "target": "linkText=My Projects",
+          "value": "",
+          "id": "4de4feda-82bc-44b7-a6e5-ba6fa9201465"
+        },
+        {
           "command": "store",
           "target": "user2",
           "value": "username",
@@ -1088,6 +1088,36 @@
           "target": "fn switchuser",
           "value": "",
           "id": "8284ea3a-1d0b-4b6b-b7fd-2fcce65abf58"
+        },
+        {
+          "command": "click",
+          "target": "linkText=Data Opt Out Tool Test ${projtype}",
+          "value": "",
+          "id": "6ecb4620-c585-4293-91b4-2bd7fb5bf77d"
+        },
+        {
+          "command": "pause",
+          "target": "2000",
+          "value": "",
+          "id": "d4d66c5d-4a6e-4207-9219-86384ebd4a48"
+        },
+        {
+          "command": "if",
+          "target": "$('#south').length == 0",
+          "value": "",
+          "id": "a9028952-ecd0-4551-b8ea-495a321d9ed3"
+        },
+        {
+          "command": "click",
+          "target": "linkText=Data Opt Out Tool Test ${projtype}",
+          "value": "",
+          "id": "2b84148e-70a7-4edd-bd2d-245df3121888"
+        },
+        {
+          "command": "end",
+          "target": "",
+          "value": "",
+          "id": "2a1b420a-55e9-48b0-9611-823898b40143"
         },
         {
           "command": "runScript",
