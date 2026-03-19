@@ -23,6 +23,8 @@ class Test_01_Configure_module_settings:
     assert len(self.driver.find_elements(By.XPATH, "//*[@id='table-proj_table'][contains(.,'Data Opt Out Tool Test L')]")) > 0
     self.vars["projtypes"] = self.driver.execute_script("return ['C','L']")
     for self.vars["projtype"] in self.vars["projtypes"]:
+      self.vars["projtype_desc"] = self.driver.execute_script("return arguments[0] == 'C' ? 'classic' : 'longitudinal'", self.vars["projtype"])
+      self.driver.execute_script("//SAVEDESC:-- Testing arguments[0] project --", self.vars["projtype_desc"])
       self.driver.find_element(By.LINK_TEXT, "Data Opt Out Tool Test "+self.vars["projtype"]).click()
       self.driver.find_element(By.CSS_SELECTOR, "a[href*=\"ExternalModules/manager/project.php\"]").click()
       self.driver.find_element(By.ID, "external-modules-enable-modules-button").click()

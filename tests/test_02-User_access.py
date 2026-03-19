@@ -24,6 +24,8 @@ class Test_02_User_access:
     assert len(self.driver.find_elements(By.XPATH, "//*[@id='table-proj_table'][contains(.,'Data Opt Out Tool Test L')]")) > 0
     self.vars["projtypes"] = self.driver.execute_script("return ['C','L']")
     for self.vars["projtype"] in self.vars["projtypes"]:
+      self.vars["projtype_desc"] = self.driver.execute_script("return arguments[0] == 'C' ? 'classic' : 'longitudinal'", self.vars["projtype"])
+      self.driver.execute_script("//SAVEDESC:-- Testing arguments[0] project --", self.vars["projtype_desc"])
       self.driver.find_element(By.LINK_TEXT, "Data Opt Out Tool Test "+self.vars["projtype"]).click()
       self.driver.execute_script("//SAVEDESC:Assert \"Process Opt-Outs\" link available.")
       assert len(self.driver.find_elements(By.CSS_SELECTOR, "a[href*=\"prefix=data_opt_out_tool\"][href*=\"page=process\"]")) > 0
@@ -42,13 +44,14 @@ class Test_02_User_access:
       sub=Sub1();sub.driver=self.driver;sub.vars=self.vars;sub.test_fn_switchuser() # Run fn switchuser
       self.driver.execute_script("//SAVEDESC:Assert \"Process Opt-Outs\" link not available.")
       assert len(self.driver.find_elements(By.CSS_SELECTOR, "a[href*=\"prefix=data_opt_out_tool\"][href*=\"page=process\"]")) == 0
+      self.vars["projpage"] = self.driver.execute_script("return window.location.href")
       self.driver.execute_script("//SETDESC:Navigate to Process Opt-Outs page.")
       self.driver.execute_script("$('#south').remove();window.location = arguments[0]", self.vars["dootpage"])
       time.sleep(2)
       self.driver.find_element(By.CSS_SELECTOR, "body").send_keys("SAVESCREENSHOT")
       self.driver.execute_script("//SAVEDESC:Assert Process Opt-Outs page not loaded.")
       assert len(self.driver.find_elements(By.ID, "doot-file-input")) == 0
-      self.driver.execute_script("window.history.back()")
+      self.driver.execute_script("window.location = arguments[0]", self.vars["projpage"])
       WebDriverWait(self.driver, 30).until(expected_conditions.presence_of_element_located((By.ID, "south")))
       self.vars["username"] = "admin"
       sub=Sub1();sub.driver=self.driver;sub.vars=self.vars;sub.test_fn_switchuser() # Run fn switchuser

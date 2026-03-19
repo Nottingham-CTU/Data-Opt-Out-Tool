@@ -670,6 +670,18 @@
           "id": "d0719270-073d-49f3-84f6-1bb93000ebed"
         },
         {
+          "command": "executeScript",
+          "target": "return ${projtype} == 'C' ? 'classic' : 'longitudinal'",
+          "value": "projtype_desc",
+          "id": "91799b72-077d-4c5d-8cae-e596b41f9f38"
+        },
+        {
+          "command": "runScript",
+          "target": "//SAVEDESC:-- Testing ${projtype_desc} project --",
+          "value": "",
+          "id": "59b315cc-c0d5-40f2-baca-11ce81113422"
+        },
+        {
           "command": "click",
           "target": "linkText=Data Opt Out Tool Test ${projtype}",
           "value": "",
@@ -952,6 +964,18 @@
           "id": "704894b9-ab4b-4a52-a23d-dcf7fd8b1a0b"
         },
         {
+          "command": "executeScript",
+          "target": "return ${projtype} == 'C' ? 'classic' : 'longitudinal'",
+          "value": "projtype_desc",
+          "id": "b5945b7c-9063-4371-ad70-a03d9ecc6269"
+        },
+        {
+          "command": "runScript",
+          "target": "//SAVEDESC:-- Testing ${projtype_desc} project --",
+          "value": "",
+          "id": "6e6fece1-31c0-4806-bdfd-12d27e4144d7"
+        },
+        {
           "command": "click",
           "target": "linkText=Data Opt Out Tool Test ${projtype}",
           "value": "",
@@ -1060,6 +1084,12 @@
           "id": "6f8041fb-3def-4b5f-a82d-70192d2e5958"
         },
         {
+          "command": "executeScript",
+          "target": "return window.location.href",
+          "value": "projpage",
+          "id": "5a7b892a-01bb-4205-8c29-6ee68906ccb3"
+        },
+        {
           "command": "runScript",
           "target": "//SETDESC:Navigate to Process Opt-Outs page.",
           "value": "",
@@ -1097,7 +1127,7 @@
         },
         {
           "command": "runScript",
-          "target": "window.history.back()",
+          "target": "window.location = ${projpage}",
           "value": "",
           "id": "5dbbbed3-3cf8-43cf-9687-44fdca551ed9"
         },
@@ -1306,10 +1336,16 @@
           "id": "c6a09d43-14c7-410d-b84f-240205a56e05"
         },
         {
-          "command": "sendKeys",
+          "command": "type",
           "target": "id=doot-header-row",
-          "value": "${KEY_RIGHT}${KEY_BACKSPACE}2",
+          "value": "2",
           "id": "8f5d838c-f006-48db-a978-80be7cb75a4c"
+        },
+        {
+          "command": "runScript",
+          "target": "document.getElementById('doot-header-row').dispatchEvent(new Event('input'))",
+          "value": "",
+          "id": "97e2a350-6eb3-40a9-af5d-bd2f02ea0a35"
         },
         {
           "command": "assertText",
@@ -1318,10 +1354,16 @@
           "id": "55f63680-c3ee-4782-8524-a36dbdf0a89b"
         },
         {
-          "command": "sendKeys",
+          "command": "type",
           "target": "id=doot-header-row",
-          "value": "${KEY_RIGHT}${KEY_BACKSPACE}1",
+          "value": "1",
           "id": "a75f36a9-a2e1-494e-a60a-ee1575af1157"
+        },
+        {
+          "command": "runScript",
+          "target": "document.getElementById('doot-header-row').dispatchEvent(new Event('input'))",
+          "value": "",
+          "id": "25e586c7-3bf6-4106-8bab-f0b95226d790"
         },
         {
           "command": "assertText",
@@ -1444,10 +1486,22 @@
           "id": "e6fdd3cf-af40-4f93-aa05-ef7aa7bd1fc2"
         },
         {
+          "command": "runScript",
+          "target": "//SETDESC:Click \"Upload\" (show instances)",
+          "value": "",
+          "id": "19fd2ae6-dbbd-40e7-84cd-2561306b855a"
+        },
+        {
           "command": "click",
           "target": "css=a[onclick*=\"showFormInstanceSelector\"]",
           "value": "",
           "id": "c0f5026d-92aa-4918-9086-9dcbfb7335b4"
+        },
+        {
+          "command": "runScript",
+          "target": "//SETDESC:Click \"Instance ${upload_id}\"",
+          "value": "",
+          "id": "1fc677cb-7f84-4d8a-b4f1-992785985241"
         },
         {
           "command": "click",

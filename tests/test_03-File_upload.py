@@ -46,9 +46,11 @@ class Test_03_File_upload:
         self.vars["removed"] = self.driver.execute_script("return ''+(Math.floor((arguments[0]+'.').length/2) == 0 ? Math.floor((arguments[1]+'.').length/2) : (9-Math.floor((arguments[0]+'.').length/2)))", self.vars["upload_in"], self.vars["upload_ex"])
         self.vars["remain"] = self.driver.execute_script("return ''+(9 - arguments[0])", self.vars["removed"])
         self.driver.find_element(By.ID, "doot-file-input").send_keys("REPODIR/tests/testdata.csv")
-        self.driver.find_element(By.ID, "doot-header-row").send_keys(Keys.RIGHT, "", Keys.BACKSPACE, "2")
+        self.driver.find_element(By.ID, "doot-header-row").send_keys("2")
+        self.driver.execute_script("document.getElementById('doot-header-row').dispatchEvent(new Event('input'))")
         assert self.driver.find_element(By.ID, "doot-header-preview").text == "Columns found: 1 • 2025-01-01 • 5634 • hiuelrhic"
-        self.driver.find_element(By.ID, "doot-header-row").send_keys(Keys.RIGHT, "", Keys.BACKSPACE, "1")
+        self.driver.find_element(By.ID, "doot-header-row").send_keys("1")
+        self.driver.execute_script("document.getElementById('doot-header-row').dispatchEvent(new Event('input'))")
         assert self.driver.find_element(By.ID, "doot-header-preview").text == "Columns found: id • date • num • text"
         self.driver.find_element(By.ID, "doot-step1-next").click()
         self.driver.find_element(By.ID, "doot-id-column").find_element(By.XPATH, "//option[. = 'id']").click()
@@ -68,7 +70,9 @@ class Test_03_File_upload:
       for self.vars["upload"] in self.vars["uploads"]:
         self.vars["upload_id"] = self.driver.execute_script("return arguments[0].id", self.vars["upload"])
         self.driver.find_element(By.CSS_SELECTOR, "a[href*=\"DataEntry/record_status_dashboard.php\"]").click()
+        self.driver.execute_script("//SETDESC:Click \"Upload\" (show instances)")
         self.driver.find_element(By.CSS_SELECTOR, "a[onclick*=\"showFormInstanceSelector\"]").click()
+        self.driver.execute_script("//SETDESC:Click \"Instance arguments[0]\"", self.vars["upload_id"])
         self.driver.find_element(By.CSS_SELECTOR, "a[href*=\"DataEntry/index.php\"][href*=\"page=upload\"][href*=\"instance="+self.vars["upload_id"]+"\"]").click()
         self.vars["upload_data"] = self.driver.execute_async_script("var cb=arguments[arguments.length-1];$.get($('#upload_file-link').attr('href'),function(d){cb(d)})")
         self.driver.execute_script("//SETDESC:Assert data correct")
