@@ -66,6 +66,7 @@ class Test_init:
         self.driver.find_element(By.XPATH, "//table[@id='table-repeat_setup']//tr[contains(.,'Upload')]//select").find_element(By.CSS_SELECTOR, "*[value='PARTIAL']").click()
       None if (element := self.driver.find_element(By.XPATH, "//table[@id='table-repeat_setup']//tr[contains(.,'Upload')]//input[@type='checkbox']")).is_selected() else element.click()
       self.driver.find_element(By.XPATH, "//*[@aria-describedby='repeatingInstanceEnableDialog']//*[contains(@class,'ui-dialog-buttonset')]//button[contains(.,'Save')]").click()
+      WebDriverWait(self.driver, 30).until(expected_conditions.presence_of_element_located((By.XPATH, "//button[@id='enableRepeatingFormsEventsBtn'][contains(.,'Modify')]")))
       self.driver.find_element(By.CSS_SELECTOR, "a[href*=\"UserRights/index.php\"]").click()
       self.driver.find_element(By.ID, "new_rolename").send_keys("Role1")
       self.driver.find_element(By.ID, "createRoleBtn").click()

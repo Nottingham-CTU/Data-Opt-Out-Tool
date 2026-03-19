@@ -460,6 +460,12 @@
           "id": "969a5831-12bb-47e2-af21-557db2843cb6"
         },
         {
+          "command": "waitForElementPresent",
+          "target": "xpath=//button[@id='enableRepeatingFormsEventsBtn'][contains(.,'Modify')]",
+          "value": "30000",
+          "id": "164b2178-e021-4750-9e29-aef106312b74"
+        },
+        {
           "command": "click",
           "target": "css=a[href*=\"UserRights/index.php\"]",
           "value": "",
