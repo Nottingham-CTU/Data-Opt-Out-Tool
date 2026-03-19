@@ -137,7 +137,7 @@
         },
         {
           "command": "pause",
-          "target": "200",
+          "target": "15000",
           "value": "",
           "id": "48be82a0-2cb9-4b22-b7d0-813dc25eb692"
         },
