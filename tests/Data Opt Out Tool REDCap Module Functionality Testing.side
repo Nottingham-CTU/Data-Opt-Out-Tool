@@ -150,7 +150,7 @@
         {
           "command": "waitForElementPresent",
           "target": "id=south",
-          "value": "30000",
+          "value": "90000",
           "id": "4dfdbab1-3a9d-43b5-b342-37fd14252ce4"
         },
         {

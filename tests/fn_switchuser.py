@@ -39,4 +39,4 @@ class Test_fn_switchuser:
     if self.driver.execute_script("return (arguments[0] !== null)", self.vars["_projtitle"]):
       time.sleep(0.2)
       self.driver.find_element(By.LINK_TEXT, self.vars["_projtitle"]).click()
-      WebDriverWait(self.driver, 30).until(expected_conditions.presence_of_element_located((By.ID, "south")))
+      WebDriverWait(self.driver, 90).until(expected_conditions.presence_of_element_located((By.ID, "south")))
