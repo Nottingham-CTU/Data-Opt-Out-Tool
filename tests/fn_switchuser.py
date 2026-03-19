@@ -31,9 +31,11 @@ class Test_fn_switchuser:
     WebDriverWait(self.driver, 30).until(expected_conditions.presence_of_element_located((By.ID, "username")))
     assert len(self.driver.find_elements(By.ID, "username")) > 0
     assert len(self.driver.find_elements(By.ID, "password")) > 0
-    self.driver.execute_script("$('#username').val(arguments[0]);$('#password').val('abc123')", self.vars["username"])
+    self.driver.execute_script("$('#username').val(arguments[0]);$('#password').val('abc123');$('#footer').remove()", self.vars["username"])
     time.sleep(0.2)
     self.driver.execute_script("//SETDESC:Log in as arguments[0]", self.vars["username"])
     self.driver.find_element(By.ID, "login_btn").click()
+    WebDriverWait(self.driver, 30).until(expected_conditions.presence_of_element_located((By.ID, "footer")))
     if self.driver.execute_script("return (arguments[0] !== null)", self.vars["_projtitle"]):
       self.driver.find_element(By.LINK_TEXT, self.vars["_projtitle"]).click()
+      WebDriverWait(self.driver, 30).until(expected_conditions.presence_of_element_located((By.ID, "south")))

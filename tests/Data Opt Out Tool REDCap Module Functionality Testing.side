@@ -101,7 +101,7 @@
         },
         {
           "command": "runScript",
-          "target": "$('#username').val(${username});$('#password').val('abc123')",
+          "target": "$('#username').val(${username});$('#password').val('abc123');$('#footer').remove()",
           "value": "",
           "id": "429aba1f-4ce7-427e-9375-483c8821e80f"
         },
@@ -124,6 +124,12 @@
           "id": "1fbc7d0e-2dce-47b7-92ec-461447e18ca0"
         },
         {
+          "command": "waitForElementPresent",
+          "target": "id=footer",
+          "value": "30000",
+          "id": "8f8c14bb-e77c-4296-bd09-88b94278cb35"
+        },
+        {
           "command": "if",
           "target": "${_projtitle} !== null",
           "value": "",
@@ -134,6 +140,12 @@
           "target": "linkText=${_projtitle}",
           "value": "",
           "id": "1f7f2900-82d5-4c16-922a-61088dfb7f45"
+        },
+        {
+          "command": "waitForElementPresent",
+          "target": "id=south",
+          "value": "30000",
+          "id": "4dfdbab1-3a9d-43b5-b342-37fd14252ce4"
         },
         {
           "command": "end",
