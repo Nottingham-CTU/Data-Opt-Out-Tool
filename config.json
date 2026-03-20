@@ -16,12 +16,35 @@
   ],
   "project-settings": [
     {
+      "key": "hdr-instruction-roles",
+      "name": "<br><b>Instructions / User Access</b>",
+      "type": "descriptive"
+    },
+    {
+      "key": "instruction-text",
+      "name": "Custom instruction text",
+      "type": "textarea",
+      "required": false
+    },
+    {
+      "key": "instruction-style",
+      "name": "Custom instruction style",
+      "type": "radio",
+      "choices": [ { "value": "", "name": "Information" }, { "value": "warn", "name": "Warning" } ],
+      "required": false
+    },
+    {
       "key": "process-roles",
       "name": "Process Roles",
       "type": "user-role-list",
       "repeatable": true,
       "required": true,
       "super-users-only": true
+    },
+    {
+      "key": "hdr-record",
+      "name": "<br><b>Record Selection</b><script>$('[field=\"process-roles\"] td:first').css('width','45%')</script>",
+      "type": "descriptive"
     },
     {
       "key": "record-label-field",
@@ -34,6 +57,11 @@
       "name": "Filter records by label field",
       "required": false,
       "type": "checkbox"
+    },
+    {
+      "key": "hdr-field",
+      "name": "<br><b>Field Selection</b>",
+      "type": "descriptive"
     },
     {
       "key": "upload-target",

@@ -5,11 +5,41 @@ use Nottingham\DataOptOutTool\DataOptOutTool;
 /** @var DataOptOutTool $module */
 $module->initializeJavascriptModuleObject();
 $jsModuleName = $module->getJavascriptModuleObjectName();
+
+$instructionText = $module->escape( $module->getProjectSetting('instruction-text') );
+$instructionText = preg_replace( '!&lt;(?:(?<t1>a)( href=&quot;(?(?=&quot;)|.)*&quot;)' .
+                                 '(?: target=&quot;_blank&quot;)?|(?<t2>b|i))&gt;((?(?=&lt;/' .
+                                 '(?:(?P=t1)|(?P=t2))&gt;)|.)*)&lt;/((?P=t1)|(?P=t2))&gt;!',
+                                 '<$5$2>$4</$5>', $instructionText );
+$instructionText = str_replace( [ '<a href=&quot;', '&quot;>' ],
+                                [ '<a href="', '" target="_blank">' ], $instructionText );
+$instructionText = nl2br( $instructionText, false );
+$instructionIcon = 'fa-circle-info';
+$instructionStyle = 'background: #c2e0f4; border: solid 2px #236fa1';
+if ( $module->getProjectSetting('instruction-style') == 'warn' )
+{
+	$instructionIcon = 'fa-triangle-exclamation';
+	$instructionStyle = 'background: #fbeeb8; border: solid 2px #d6a400';
+}
+$instructionStyle .= '; border-radius: 5px; margin: 25px 0; padding: 7px; display: flex; gap: 5px;';
 ?>
-<h3>Process Opt-Outs</h3>
+<h3 style="margin-bottom:20px">Process Opt-Outs</h3>
 
 <!-- Step 1: File selection + header row -->
 <div id="doot-step-1">
+<?php
+    if ( $instructionText != '' )
+    {
+?>
+    <div style="<?php echo $instructionStyle; ?>">
+        <i class="fas <?php echo $instructionIcon; ?> fs20"></i>
+        <div>
+            <?php echo $instructionText, "\n"; ?>
+        </div>
+    </div>
+<?php
+    }
+?>
     <div class="mb-3">
         <label for="doot-file-input" class="form-label fw-bold">Select CSV file</label>
         <input type="file" id="doot-file-input" class="form-control" accept=".csv,text/csv">
