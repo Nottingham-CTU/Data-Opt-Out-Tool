@@ -44,7 +44,7 @@ $instructionStyle .= '; border-radius: 5px; margin: 25px 0; padding: 7px; displa
         <label for="doot-file-input" class="form-label fw-bold">Select CSV file</label>
         <input type="file" id="doot-file-input" class="form-control" accept=".csv,text/csv">
     </div>
-    <p class="text-muted small">
+    <p class="text-muted small" style="margin-bottom:15px">
         <i class="fas fa-lock me-1"></i>
         Processing happens entirely on your device — no data is sent to REDCap until you
         click <strong>Upload</strong> in the final step, after filtering is applied.
@@ -55,6 +55,10 @@ $instructionStyle .= '; border-radius: 5px; margin: 25px 0; padding: 7px; displa
             <input type="number" id="doot-header-row" class="form-control" style="width:100px;"
                    min="1" value="1">
             <div id="doot-header-preview" class="mt-2 text-muted small"></div>
+            <div class="text-muted small" style="margin:2px 0 10px">
+                If the <i>columns found</i> are not the headers, adjust the header row until the
+                column headers are displayed.
+            </div>
             <button id="doot-step1-next" class="btn btn-primary mt-2">Next &rarr;</button>
         </div>
     </div>
