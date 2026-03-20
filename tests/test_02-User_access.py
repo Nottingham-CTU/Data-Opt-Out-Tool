@@ -27,6 +27,7 @@ class Test_02_User_access:
       self.vars["projtype_desc"] = self.driver.execute_script("return arguments[0] == 'C' ? 'classic' : 'longitudinal'", self.vars["projtype"])
       self.driver.execute_script("//SAVEDESC:-- Testing arguments[0] project --", self.vars["projtype_desc"])
       self.driver.find_element(By.LINK_TEXT, "Data Opt Out Tool Test "+self.vars["projtype"]).click()
+      self.vars["projpage"] = self.driver.execute_script("return window.location.href")
       self.driver.execute_script("//SAVEDESC:Assert \"Process Opt-Outs\" link available.")
       assert len(self.driver.find_elements(By.CSS_SELECTOR, "a[href*=\"prefix=data_opt_out_tool\"][href*=\"page=process\"]")) > 0
       self.driver.find_element(By.CSS_SELECTOR, "a[href*=\"prefix=data_opt_out_tool\"][href*=\"page=process\"]").click()
@@ -40,16 +41,10 @@ class Test_02_User_access:
       self.driver.find_element(By.CSS_SELECTOR, "a[href*=\"prefix=data_opt_out_tool\"][href*=\"page=process\"]").click()
       self.driver.execute_script("//SAVEDESC:Assert Process Opt-Outs page loaded.")
       assert len(self.driver.find_elements(By.ID, "doot-file-input")) > 0
-      self.driver.find_element(By.LINK_TEXT, "My Projects").click()
       self.vars["username"] = "user2"
       sub=Sub1();sub.driver=self.driver;sub.vars=self.vars;sub.test_fn_switchuser() # Run fn switchuser
-      self.driver.find_element(By.LINK_TEXT, "Data Opt Out Tool Test "+self.vars["projtype"]).click()
-      time.sleep(2)
-      if self.driver.execute_script("return ($('#south').length == 0)"):
-        self.driver.find_element(By.LINK_TEXT, "Data Opt Out Tool Test "+self.vars["projtype"]).click()
       self.driver.execute_script("//SAVEDESC:Assert \"Process Opt-Outs\" link not available.")
       assert len(self.driver.find_elements(By.CSS_SELECTOR, "a[href*=\"prefix=data_opt_out_tool\"][href*=\"page=process\"]")) == 0
-      self.vars["projpage"] = self.driver.execute_script("return window.location.href")
       self.driver.execute_script("//SETDESC:Navigate to Process Opt-Outs page.")
       self.driver.execute_script("$('#south').remove();window.location = arguments[0]", self.vars["dootpage"])
       time.sleep(2)

@@ -994,6 +994,12 @@
           "id": "c9d16bf6-1e0a-4340-9891-e59825aae34e"
         },
         {
+          "command": "executeScript",
+          "target": "return window.location.href",
+          "value": "projpage",
+          "id": "5a7b892a-01bb-4205-8c29-6ee68906ccb3"
+        },
+        {
           "command": "runScript",
           "target": "//SAVEDESC:Assert \"Process Opt-Outs\" link available.",
           "value": "",
@@ -1072,12 +1078,6 @@
           "id": "85d67b05-3c2c-42c1-bc57-aabbcfcdb7ea"
         },
         {
-          "command": "click",
-          "target": "linkText=My Projects",
-          "value": "",
-          "id": "4de4feda-82bc-44b7-a6e5-ba6fa9201465"
-        },
-        {
           "command": "store",
           "target": "user2",
           "value": "username",
@@ -1090,36 +1090,6 @@
           "id": "8284ea3a-1d0b-4b6b-b7fd-2fcce65abf58"
         },
         {
-          "command": "click",
-          "target": "linkText=Data Opt Out Tool Test ${projtype}",
-          "value": "",
-          "id": "6ecb4620-c585-4293-91b4-2bd7fb5bf77d"
-        },
-        {
-          "command": "pause",
-          "target": "2000",
-          "value": "",
-          "id": "d4d66c5d-4a6e-4207-9219-86384ebd4a48"
-        },
-        {
-          "command": "if",
-          "target": "$('#south').length == 0",
-          "value": "",
-          "id": "a9028952-ecd0-4551-b8ea-495a321d9ed3"
-        },
-        {
-          "command": "click",
-          "target": "linkText=Data Opt Out Tool Test ${projtype}",
-          "value": "",
-          "id": "2b84148e-70a7-4edd-bd2d-245df3121888"
-        },
-        {
-          "command": "end",
-          "target": "",
-          "value": "",
-          "id": "2a1b420a-55e9-48b0-9611-823898b40143"
-        },
-        {
           "command": "runScript",
           "target": "//SAVEDESC:Assert \"Process Opt-Outs\" link not available.",
           "value": "",
@@ -1130,12 +1100,6 @@
           "target": "css=a[href*=\"prefix=data_opt_out_tool\"][href*=\"page=process\"]",
           "value": "",
           "id": "6f8041fb-3def-4b5f-a82d-70192d2e5958"
-        },
-        {
-          "command": "executeScript",
-          "target": "return window.location.href",
-          "value": "projpage",
-          "id": "5a7b892a-01bb-4205-8c29-6ee68906ccb3"
         },
         {
           "command": "runScript",
