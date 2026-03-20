@@ -38,8 +38,7 @@
       "name": "Process Roles",
       "type": "user-role-list",
       "repeatable": true,
-      "required": true,
-      "super-users-only": true
+      "required": true
     },
     {
       "key": "hdr-record",
@@ -69,7 +68,6 @@
       "type": "sub_settings",
       "repeatable": false,
       "required": true,
-      "super-users-only": true,
       "sub_settings": [
         {
           "key": "upload-mode",
