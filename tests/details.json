@@ -1,0 +1,17 @@
+[
+	{
+		"file" : "test_01-Configure_module_settings.py",
+		"name" : "Configure module settings",
+		"expected" : "Check that the module settings validate correctly"
+	},
+	{
+		"file" : "test_02-User_access.py",
+		"name" : "User access",
+		"expected" : "Only administrators and users added to a selected role can use the Data Opt Out Tool"
+	},
+	{
+		"file" : "test_03-File_upload.py",
+		"name" : "File upload",
+		"expected" : "Files are uploaded with the appropriate rows removed (test exclusion list, inclusion list, and both) on classic and longitudinal project"
+	}
+]

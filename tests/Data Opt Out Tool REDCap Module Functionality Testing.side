@@ -1,0 +1,1594 @@
+{
+  "id": "a7c5a152-dd94-4ea0-b227-5e824f8b999c",
+  "version": "3.0",
+  "name": "Data Opt Out Tool REDCap Module Functionality Testing",
+  "url": "http://127.0.0.1",
+  "urls": [
+    "http://127.0.0.1"
+  ],
+  "plugins": [],
+  "suites": [],
+  "tests": [
+    {
+      "id": "00ccdcc6-79c4-4dc8-acd8-a1f152f0694f",
+      "name": "fn switchuser",
+      "commands": [
+        {
+          "command": "if",
+          "target": "$('#subheaderDiv2').length > 0",
+          "value": "",
+          "id": "c2f548f3-3f4a-4398-8585-ddc45aff1bf7",
+          "comment": "Arguments: username (user to log in as)"
+        },
+        {
+          "id": "5eb45b85-a548-476a-a305-027fb1a5c38b",
+          "command": "executeScript",
+          "target": "$('#subheaderDiv2 span').remove();return $('#subheaderDiv2').text()",
+          "value": "_projtitle",
+          "comment": ""
+        },
+        {
+          "command": "else",
+          "target": "",
+          "value": "",
+          "id": "499c0a40-cac9-44d7-9d9a-0007feb4650b"
+        },
+        {
+          "command": "executeScript",
+          "target": "return null",
+          "value": "_projtitle",
+          "id": "abcace7f-23c1-43e8-8530-b89455fa25af"
+        },
+        {
+          "command": "end",
+          "target": "",
+          "value": "",
+          "id": "f2f81192-9cb7-4bb8-be41-47a87c176d3d"
+        },
+        {
+          "command": "executeScript",
+          "target": "return $('a[href*=\"index.php?action=myprojects\"]').attr('href')",
+          "value": "_myprojects",
+          "id": "fabb61e9-4b59-4df9-9021-e160e05d2fed"
+        },
+        {
+          "command": "executeScript",
+          "target": "return $('#username-reference').text()",
+          "value": "_oldusername",
+          "id": "f4127fe6-381c-4a6f-9084-cfc45d753ffe"
+        },
+        {
+          "command": "runScript",
+          "target": "//SETDESC:Log out as ${_oldusername}",
+          "value": "",
+          "id": "6f2b89eb-c0fe-4106-925d-21d0074c1c41"
+        },
+        {
+          "command": "click",
+          "target": "css=a[href*=\"logout=1\"]",
+          "value": "",
+          "id": "9aba310c-1e0d-46a0-9580-a59e63dd972d"
+        },
+        {
+          "command": "waitForElementPresent",
+          "target": "id=username",
+          "value": "30000",
+          "id": "58be3446-31b8-45d8-9bd9-e4db0087a474"
+        },
+        {
+          "command": "runScript",
+          "target": "$('#username').remove();window.location = ${_myprojects}",
+          "value": "",
+          "id": "076e3a18-c9a2-4a04-a15c-962d7a0c3edd"
+        },
+        {
+          "command": "waitForElementPresent",
+          "target": "id=username",
+          "value": "30000",
+          "id": "6046ada7-5496-452d-aacd-0074001903a4"
+        },
+        {
+          "command": "assertElementPresent",
+          "target": "id=username",
+          "value": "",
+          "id": "20f9e636-3fb4-4521-afee-3b5d8733d19d"
+        },
+        {
+          "command": "assertElementPresent",
+          "target": "id=password",
+          "value": "",
+          "id": "f2984e7e-47be-4c79-8513-f863f4e3373f"
+        },
+        {
+          "command": "runScript",
+          "target": "$('#username').val(${username});$('#password').val('abc123');$('#footer').remove()",
+          "value": "",
+          "id": "429aba1f-4ce7-427e-9375-483c8821e80f"
+        },
+        {
+          "command": "pause",
+          "target": "200",
+          "value": "",
+          "id": "d94c6307-6eae-4237-acc5-cc369e85ea94"
+        },
+        {
+          "command": "runScript",
+          "target": "//SETDESC:Log in as ${username}",
+          "value": "",
+          "id": "313092b0-183f-4dda-bf4f-484cf09563b4"
+        },
+        {
+          "command": "click",
+          "target": "id=login_btn",
+          "value": "",
+          "id": "1fbc7d0e-2dce-47b7-92ec-461447e18ca0"
+        },
+        {
+          "command": "waitForElementPresent",
+          "target": "id=footer",
+          "value": "30000",
+          "id": "8f8c14bb-e77c-4296-bd09-88b94278cb35"
+        },
+        {
+          "command": "if",
+          "target": "${_projtitle} !== null",
+          "value": "",
+          "id": "0fc55df1-ed21-474f-b7e1-cab86df36c33"
+        },
+        {
+          "command": "click",
+          "target": "linkText=${_projtitle}",
+          "value": "",
+          "id": "1f7f2900-82d5-4c16-922a-61088dfb7f45"
+        },
+        {
+          "command": "waitForElementPresent",
+          "target": "id=south",
+          "value": "30000",
+          "id": "4dfdbab1-3a9d-43b5-b342-37fd14252ce4"
+        },
+        {
+          "command": "end",
+          "target": "",
+          "value": "",
+          "id": "8d40def7-3d77-4223-830a-3cfe911ddba5"
+        }
+      ]
+    },
+    {
+      "id": "abe1d53a-bf92-4cbd-aa96-be44bc76e930",
+      "name": "init",
+      "commands": [
+        {
+          "id": "492b1e24-61b9-45f1-b725-caf5df4e0346",
+          "command": "open",
+          "target": "/",
+          "value": ""
+        },
+        {
+          "command": "click",
+          "target": "linkText=My Projects",
+          "value": "",
+          "id": "4d61dffb-3af2-4b10-9a30-2710669607b8"
+        },
+        {
+          "command": "assertElementNotPresent",
+          "target": "xpath=//*[@id='table-proj_table'][contains(.,'Data Opt Out Tool Test')]",
+          "value": "",
+          "id": "ed48036e-a2a0-4528-8a9c-912dc42b9e20"
+        },
+        {
+          "command": "executeScript",
+          "target": "return ['C','L']",
+          "value": "projtypes",
+          "id": "afbcc282-3de9-48d9-9209-1df42dde2b25"
+        },
+        {
+          "command": "forEach",
+          "target": "projtypes",
+          "value": "projtype",
+          "id": "15227cb5-05a4-4429-86d4-6cf1da0dee30"
+        },
+        {
+          "command": "click",
+          "target": "linkText=New Project",
+          "value": "",
+          "id": "677fee15-160d-46b9-8dd5-d654bbcc3987"
+        },
+        {
+          "command": "type",
+          "target": "id=app_title",
+          "value": "Data Opt Out Tool Test ${projtype}",
+          "id": "c3a39a5b-19dd-44e5-8dd2-cb3a745b2a6d"
+        },
+        {
+          "command": "select",
+          "target": "id=purpose",
+          "value": "value=0",
+          "id": "961a1311-79e9-47d4-9819-4160bdbbf2d8"
+        },
+        {
+          "command": "click",
+          "target": "id=project_template_radio1",
+          "value": "",
+          "id": "fca2238e-bbd2-4319-adf7-ca78f90916ef"
+        },
+        {
+          "command": "click",
+          "target": "xpath=//table[@id='table-template_projects_list']//tr[contains(.,'Basic Demography')]//input",
+          "value": "",
+          "id": "d8124b8c-2502-4986-9542-70430aecd277"
+        },
+        {
+          "command": "click",
+          "target": "css=.btn-primaryrc",
+          "value": "",
+          "id": "f0874467-ab23-4ea7-a5f4-51cb83b7d064"
+        },
+        {
+          "command": "pause",
+          "target": "5000",
+          "value": "",
+          "id": "909fe016-37b1-424f-984e-a72e3cd54512"
+        },
+        {
+          "command": "click",
+          "target": "css=a[href*=\"Design/online_designer.php\"]",
+          "value": "",
+          "id": "b0c3d14d-6139-4ec2-814d-0d7155abbfd6"
+        },
+        {
+          "command": "click",
+          "target": "css=button[onclick*=\"showAddForm()\"]",
+          "value": "",
+          "id": "44a9c0c7-40b1-433d-b79a-e063a740b0ea"
+        },
+        {
+          "command": "click",
+          "target": "css=#new-demographics button[onclick*=\"addNewFormReveal\"]",
+          "value": "",
+          "id": "ff72be3b-b306-4784-9825-0279904c0e26"
+        },
+        {
+          "command": "type",
+          "target": "id=new_form-demographics",
+          "value": "Upload",
+          "id": "239efb70-375b-4489-8c3c-019a3ecf9837"
+        },
+        {
+          "command": "if",
+          "target": "$('#new_form_var-demographics').length > 0",
+          "value": "",
+          "id": "4e6a2f27-c355-4a01-b9aa-bfc7cc8bc9ff"
+        },
+        {
+          "command": "type",
+          "target": "id=new_form_var-demographics",
+          "value": "upload",
+          "id": "2c087c0f-f00c-40eb-9c4e-64d7a59eb835"
+        },
+        {
+          "command": "end",
+          "target": "",
+          "value": "",
+          "id": "efae886d-1413-476d-8f48-f4b3ec8361ce"
+        },
+        {
+          "command": "click",
+          "target": "css=#new-demographics input[onclick*=\"addNewForm\"]",
+          "value": "",
+          "id": "92194a44-46ac-41ab-8bed-e3455764a54a"
+        },
+        {
+          "command": "click",
+          "target": "css=[aria-describedby] .ui-dialog-buttonset .close-button",
+          "value": "",
+          "id": "fad0c7a8-eac0-4794-a9a7-90e2ba5de41b"
+        },
+        {
+          "command": "click",
+          "target": "id=formlabel-upload",
+          "value": "",
+          "id": "626bca91-78f9-4afc-9b75-a96e0cafcb4e"
+        },
+        {
+          "command": "click",
+          "target": "id=btn-last",
+          "value": "",
+          "id": "89685f6e-8856-490b-8b72-b8ebb01d0629"
+        },
+        {
+          "command": "select",
+          "target": "id=field_type",
+          "value": "label=File Upload (for users to upload files)",
+          "id": "50901276-f417-4c64-bc06-978401bf2caa"
+        },
+        {
+          "command": "type",
+          "target": "id=field_label",
+          "value": "File upload",
+          "id": "fc1ffa92-ca38-432b-b2ca-b80698e4912f"
+        },
+        {
+          "command": "type",
+          "target": "id=field_name",
+          "value": "upload_file",
+          "id": "f54ba2fb-2684-45f2-b3df-01ed9f153fe7"
+        },
+        {
+          "command": "click",
+          "target": "css=[aria-describedby=\"div_add_field\"] .ui-dialog-buttonset button[style*=\"bold\"]",
+          "value": "",
+          "id": "f30bf608-c6ef-4ad2-b79b-d6811b67340b"
+        },
+        {
+          "command": "if",
+          "target": "${projtype} == 'L'",
+          "value": "",
+          "id": "909110e8-9c99-4cf7-890c-a1b6b4b13ec2"
+        },
+        {
+          "command": "click",
+          "target": "css=a[href*=\"ProjectSetup/index.php\"]",
+          "value": "",
+          "id": "b422c40e-5e72-420d-a3f0-ffb2fa7e70ef"
+        },
+        {
+          "command": "click",
+          "target": "id=setupLongiBtn",
+          "value": "",
+          "id": "ad22a051-bf9c-4e9e-bb08-e796cd115b79"
+        },
+        {
+          "command": "waitForElementPresent",
+          "target": "xpath=//button[@id='setupLongiBtn'][contains(.,'Disable')]",
+          "value": "30000",
+          "id": "208becbf-79a0-4207-911a-db449fbbd625"
+        },
+        {
+          "command": "click",
+          "target": "css=a[href*=\"Design/define_events.php\"]",
+          "value": "",
+          "id": "09f0a282-688c-4c27-b25c-854868655ff3"
+        },
+        {
+          "command": "type",
+          "target": "id=descrip",
+          "value": "Event 2",
+          "id": "09814e9d-2907-48c4-bbe7-c3d5f19e29d8"
+        },
+        {
+          "command": "runScript",
+          "target": "$('#south').remove()",
+          "value": "",
+          "id": "8020eaa1-1685-47e5-827b-abdee7b3fdd4"
+        },
+        {
+          "command": "click",
+          "target": "id=addbutton",
+          "value": "",
+          "id": "67c184e8-9ce9-4c6b-8dc9-eeb309204ab2"
+        },
+        {
+          "command": "waitForElementPresent",
+          "target": "id=south",
+          "value": "30000",
+          "id": "6f4c3651-37a6-40c6-8f09-1033f95412ac"
+        },
+        {
+          "command": "click",
+          "target": "css=a[href*=\"Design/designate_forms.php\"]",
+          "value": "",
+          "id": "1390948a-a7e1-425a-8296-5ca266024e91"
+        },
+        {
+          "command": "click",
+          "target": "id=beginEditBtn",
+          "value": "",
+          "id": "46574bcc-d1f3-443d-99eb-34e6d6bedb1f"
+        },
+        {
+          "command": "check",
+          "target": "xpath=(//*[@id='event_grid_table']//input)[1]",
+          "value": "",
+          "id": "6e3b4463-08b7-4cd4-8847-54ec69402167"
+        },
+        {
+          "command": "uncheck",
+          "target": "xpath=(//*[@id='event_grid_table']//input)[2]",
+          "value": "",
+          "id": "b8256b89-8a4b-4d32-b468-7153b27a9901"
+        },
+        {
+          "command": "uncheck",
+          "target": "xpath=(//*[@id='event_grid_table']//input)[3]",
+          "value": "",
+          "id": "8c0b478f-4ee0-4461-82bf-23c0633aeea8"
+        },
+        {
+          "command": "check",
+          "target": "xpath=(//*[@id='event_grid_table']//input)[4]",
+          "value": "",
+          "id": "917a0baf-2df8-42cd-86b6-a93dcd5f1b80"
+        },
+        {
+          "command": "click",
+          "target": "id=save_btn",
+          "value": "",
+          "id": "a0edb10e-6c33-41af-a848-c50b9aae0951"
+        },
+        {
+          "command": "waitForElementNotPresent",
+          "target": "css=#beginEditBtn[disabled]",
+          "value": "30000",
+          "id": "03a18f69-4c77-48a5-bcc5-fb9474407f59"
+        },
+        {
+          "command": "end",
+          "target": "",
+          "value": "",
+          "id": "29b3f893-3085-4478-84fb-b8daf05ce969"
+        },
+        {
+          "command": "click",
+          "target": "css=a[href*=\"ProjectSetup/index.php\"]",
+          "value": "",
+          "id": "faa2ab19-ca56-47a5-8865-2884a256804d"
+        },
+        {
+          "command": "click",
+          "target": "id=enableRepeatingFormsEventsBtn",
+          "value": "",
+          "id": "226e6288-0341-48e7-8259-6a7219235ef4"
+        },
+        {
+          "command": "if",
+          "target": "${projtype} == 'L'",
+          "value": "",
+          "id": "690b763e-83d9-431c-b213-1edb79cf2f68"
+        },
+        {
+          "command": "select",
+          "target": "xpath=//table[@id='table-repeat_setup']//tr[contains(.,'Upload')]//select",
+          "value": "value=PARTIAL",
+          "id": "871d8e9e-88a8-4cba-b9c5-fe486ae69b68"
+        },
+        {
+          "command": "end",
+          "target": "",
+          "value": "",
+          "id": "9795f838-ecca-4c36-8a13-cb1436935129"
+        },
+        {
+          "command": "check",
+          "target": "xpath=//table[@id='table-repeat_setup']//tr[contains(.,'Upload')]//input[@type='checkbox']",
+          "value": "",
+          "id": "f588a9f2-b1fa-47c3-8d65-223d2a8cf079"
+        },
+        {
+          "command": "click",
+          "target": "xpath=//*[@aria-describedby='repeatingInstanceEnableDialog']//*[contains(@class,'ui-dialog-buttonset')]//button[contains(.,'Save')]",
+          "value": "",
+          "id": "969a5831-12bb-47e2-af21-557db2843cb6"
+        },
+        {
+          "command": "waitForElementPresent",
+          "target": "xpath=//button[@id='enableRepeatingFormsEventsBtn'][contains(.,'Modify')]",
+          "value": "30000",
+          "id": "164b2178-e021-4750-9e29-aef106312b74"
+        },
+        {
+          "command": "click",
+          "target": "css=a[href*=\"UserRights/index.php\"]",
+          "value": "",
+          "id": "d8c94f5a-fef6-4f83-8fa4-ebeb03687e43"
+        },
+        {
+          "command": "type",
+          "target": "id=new_rolename",
+          "value": "Role1",
+          "id": "2e6f61f3-fccc-4b91-9dad-35644cb22f73"
+        },
+        {
+          "command": "click",
+          "target": "id=createRoleBtn",
+          "value": "",
+          "id": "7d977013-1ba8-4bee-8ac2-5384c9d8d286"
+        },
+        {
+          "command": "uncheck",
+          "target": "css=input[name=\"design\"]",
+          "value": "",
+          "id": "4eb68297-6bef-4199-9d39-064462ffe839"
+        },
+        {
+          "command": "click",
+          "target": "css=div[aria-describedby=\"editUserPopup\"] .ui-dialog-buttonset button[style*=\"bold\"]",
+          "value": "",
+          "id": "effc5731-6e6e-49ea-abb3-607e92252680"
+        },
+        {
+          "command": "waitForElementPresent",
+          "target": "xpath=//table[@id='table-user_rights_roles_table']//tr[contains(.,'Role1')]",
+          "value": "30000",
+          "id": "18534e69-a573-45e7-99a6-c7ac5d35a046"
+        },
+        {
+          "command": "type",
+          "target": "id=new_username_assign",
+          "value": "user1",
+          "id": "a56df47a-9764-4a43-8cac-5623fedd9954"
+        },
+        {
+          "command": "click",
+          "target": "id=assignUserBtn",
+          "value": "",
+          "id": "3c8334ee-ada7-44a4-afe2-693698af5d59"
+        },
+        {
+          "command": "waitForElementVisible",
+          "target": "id=notify_email_role",
+          "value": "30000",
+          "id": "acac5ede-a591-4ced-bfc1-d851918a4328"
+        },
+        {
+          "command": "uncheck",
+          "target": "id=notify_email_role",
+          "value": "",
+          "id": "cd3fc0cf-4716-4e26-bb81-c20124751a6a"
+        },
+        {
+          "command": "select",
+          "target": "id=user_role",
+          "value": "label=Role1",
+          "id": "733f5fc7-5391-41d0-98fa-d2a6da0fbde0"
+        },
+        {
+          "command": "click",
+          "target": "id=assignDagRoleBtn",
+          "value": "",
+          "id": "05151afe-c7e7-4a6a-bb04-8c724104ef65"
+        },
+        {
+          "command": "waitForElementPresent",
+          "target": "xpath=//table[@id='table-user_rights_roles_table']//tr[contains(.,'user1')]",
+          "value": "30000",
+          "id": "1faa2e15-0050-4950-a59f-cd055ecf9523"
+        },
+        {
+          "command": "type",
+          "target": "id=new_rolename",
+          "value": "Role2",
+          "id": "474e1477-3776-4608-acff-895faed1bab6"
+        },
+        {
+          "command": "click",
+          "target": "id=createRoleBtn",
+          "value": "",
+          "id": "95a02d2b-2c7d-4fd3-bb86-bb120eafb201"
+        },
+        {
+          "command": "uncheck",
+          "target": "css=input[name=\"design\"]",
+          "value": "",
+          "id": "5491b923-0444-4b3d-88c3-c6414f48321c"
+        },
+        {
+          "command": "click",
+          "target": "css=div[aria-describedby=\"editUserPopup\"] .ui-dialog-buttonset button[style*=\"bold\"]",
+          "value": "",
+          "id": "947dac4f-194c-4440-8a41-9646aa4dab8c"
+        },
+        {
+          "command": "waitForElementPresent",
+          "target": "xpath=//table[@id='table-user_rights_roles_table']//tr[contains(.,'Role2')]",
+          "value": "30000",
+          "id": "b34f729d-25b8-4cb0-9cb2-2082e939aa8c"
+        },
+        {
+          "command": "type",
+          "target": "id=new_username_assign",
+          "value": "user2",
+          "id": "aaacf388-7573-4faf-9dcb-03af4e6be43a"
+        },
+        {
+          "command": "click",
+          "target": "id=assignUserBtn",
+          "value": "",
+          "id": "0cb616c3-c46e-435f-b8e3-dd018ed62005"
+        },
+        {
+          "command": "waitForElementVisible",
+          "target": "id=notify_email_role",
+          "value": "30000",
+          "id": "3add6246-f4b4-4f27-a0d7-dedc15aeda21"
+        },
+        {
+          "command": "uncheck",
+          "target": "id=notify_email_role",
+          "value": "",
+          "id": "f789df5e-ae80-4d79-9364-1c6c4ebadd70"
+        },
+        {
+          "command": "select",
+          "target": "id=user_role",
+          "value": "label=Role2",
+          "id": "3a55fda4-2522-42ea-a179-a74e73458287"
+        },
+        {
+          "command": "click",
+          "target": "id=assignDagRoleBtn",
+          "value": "",
+          "id": "40183ab6-7c22-4679-9dce-e7ece63f49ed"
+        },
+        {
+          "command": "waitForElementPresent",
+          "target": "xpath=//table[@id='table-user_rights_roles_table']//tr[contains(.,'user2')]",
+          "value": "30000",
+          "id": "da527b58-dd93-453a-86f2-a48d50d382ec"
+        },
+        {
+          "command": "click",
+          "target": "linkText=My Projects",
+          "value": "",
+          "id": "01503486-9f79-4b81-b3be-39123fd64934"
+        },
+        {
+          "command": "end",
+          "target": "",
+          "value": "",
+          "id": "dac180c7-1dc0-4fe5-9a13-4eb56caa4fd5"
+        }
+      ]
+    },
+    {
+      "id": "035a2df6-3800-49bf-9e99-e398cdf50b37",
+      "name": "t01 - Configure module settings",
+      "commands": [
+        {
+          "id": "f143f052-320d-4dcc-a51c-9c6c9f332427",
+          "command": "open",
+          "target": "/",
+          "value": ""
+        },
+        {
+          "command": "click",
+          "target": "linkText=My Projects",
+          "value": "",
+          "id": "53ab4d96-433d-419f-8356-bc253c0dc34f"
+        },
+        {
+          "command": "assertElementPresent",
+          "target": "xpath=//*[@id='table-proj_table'][contains(.,'Data Opt Out Tool Test C')]",
+          "value": "",
+          "id": "19c3c511-453a-410d-9e1b-0fda1bd37278"
+        },
+        {
+          "command": "assertElementPresent",
+          "target": "xpath=//*[@id='table-proj_table'][contains(.,'Data Opt Out Tool Test L')]",
+          "value": "",
+          "id": "b5c70a1a-3dce-4628-8e70-f7227e349a36"
+        },
+        {
+          "command": "executeScript",
+          "target": "return ['C','L']",
+          "value": "projtypes",
+          "id": "9ce8358f-dc25-4415-9329-6cc289b2721f"
+        },
+        {
+          "command": "forEach",
+          "target": "projtypes",
+          "value": "projtype",
+          "id": "d0719270-073d-49f3-84f6-1bb93000ebed"
+        },
+        {
+          "command": "executeScript",
+          "target": "return ${projtype} == 'C' ? 'classic' : 'longitudinal'",
+          "value": "projtype_desc",
+          "id": "91799b72-077d-4c5d-8cae-e596b41f9f38"
+        },
+        {
+          "command": "runScript",
+          "target": "//SAVEDESC:-- Testing ${projtype_desc} project --",
+          "value": "",
+          "id": "59b315cc-c0d5-40f2-baca-11ce81113422"
+        },
+        {
+          "command": "click",
+          "target": "linkText=Data Opt Out Tool Test ${projtype}",
+          "value": "",
+          "id": "fda47b4b-68ee-40b2-91fc-0792283bd77e"
+        },
+        {
+          "command": "click",
+          "target": "css=a[href*=\"ExternalModules/manager/project.php\"]",
+          "value": "",
+          "id": "1c3c7382-1613-4f81-a05b-1a8a8ab8a997"
+        },
+        {
+          "command": "click",
+          "target": "id=external-modules-enable-modules-button",
+          "value": "",
+          "id": "6a30f1ad-50ab-48f5-bf40-b4d7f4cbc3c6"
+        },
+        {
+          "command": "click",
+          "target": "css=tr[data-module=\"data_opt_out_tool\"] button.enable-button",
+          "value": "",
+          "id": "bdc4e170-a646-430b-ae07-425c0a73d23c"
+        },
+        {
+          "command": "waitForElementPresent",
+          "target": "css=tr[data-module=\"data_opt_out_tool\"] button.external-modules-configure-button",
+          "value": "30000",
+          "id": "604aae46-fbc2-49c4-9163-040aed008cdc"
+        },
+        {
+          "command": "click",
+          "target": "css=tr[data-module=\"data_opt_out_tool\"] button.external-modules-configure-button",
+          "value": "",
+          "id": "0aee806d-6f5e-4536-8d8d-a4ba8487c8af"
+        },
+        {
+          "command": "select",
+          "target": "css=[name*=\"process-roles\"]",
+          "value": "label=Role1",
+          "id": "43b3305a-cd63-4d2b-8289-85c62801ab3b"
+        },
+        {
+          "command": "type",
+          "target": "name=record-label-field",
+          "value": "first_name",
+          "id": "6b4d22da-b352-4113-bf2d-d75e652358e6"
+        },
+        {
+          "command": "check",
+          "target": "name=record-label-filter",
+          "value": "",
+          "id": "f8f46624-b9eb-4900-942b-32229286ad39"
+        },
+        {
+          "command": "if",
+          "target": "${projtype} == 'C'",
+          "value": "",
+          "id": "3398e59d-963e-40fc-83ca-490a4d15525d"
+        },
+        {
+          "command": "runScript",
+          "target": "//SETDESC:Click \"Longitudinal: repeating form\"",
+          "value": "",
+          "id": "c436041e-6ed4-4b5b-afe0-5de49749b555"
+        },
+        {
+          "command": "check",
+          "target": "css=[name*=\"upload-mode\"][value=\"longitudinal-form\"]",
+          "value": "",
+          "id": "b3800073-4724-4a48-b6c3-bcf3a5a3cfdd"
+        },
+        {
+          "command": "type",
+          "target": "css=[name*=\"upload-event\"]",
+          "value": ".",
+          "id": "4924ff8f-eb4d-4302-a998-e7ee13106d61"
+        },
+        {
+          "command": "executeScript",
+          "target": "return 'An error occurred while saving settings:'+decodeURIComponent('%0a%0a')+'Longitudinal repeat type selected, but project is classic.'",
+          "value": "errmsg",
+          "id": "08beedd5-8539-49fb-9c07-3a02a512c551"
+        },
+        {
+          "command": "else",
+          "target": "",
+          "value": "",
+          "id": "459d82ad-7608-48c5-ad8a-98ff3b7793c8"
+        },
+        {
+          "command": "runScript",
+          "target": "//SETDESC:Click \"Classic: repeating form\"",
+          "value": "",
+          "id": "cb1ba801-da60-4e6e-8630-87cf70540b3d"
+        },
+        {
+          "command": "check",
+          "target": "css=[name*=\"upload-mode\"][value=\"classic-form\"]",
+          "value": "",
+          "id": "214b95d6-26c2-48e3-bcc1-c297f61831f1"
+        },
+        {
+          "command": "executeScript",
+          "target": "return 'An error occurred while saving settings:'+decodeURIComponent('%0a%0a')+'Classic repeat type selected, but project is longitudinal.'",
+          "value": "errmsg",
+          "id": "86dc811a-300f-4535-8dee-23f859caac72"
+        },
+        {
+          "command": "end",
+          "target": "",
+          "value": "",
+          "id": "fe8b69e3-1d98-458d-bd7b-d2f8a435c00e"
+        },
+        {
+          "command": "select",
+          "target": "css=[name*=\"upload-form\"]",
+          "value": "value=upload",
+          "id": "d1a83d4f-d40e-4591-a515-5fa5049c3d26"
+        },
+        {
+          "command": "select",
+          "target": "css=[name*=\"upload-field\"]",
+          "value": "value=upload_file",
+          "id": "a03d5adb-9438-4f59-9451-9defedd66f48"
+        },
+        {
+          "command": "click",
+          "target": "css=#external-modules-configure-modal .modal-footer button.save",
+          "value": "",
+          "id": "7b0e0aed-d3c7-457d-ae42-11ae457d5d4f"
+        },
+        {
+          "command": "pause",
+          "target": "3000",
+          "value": "",
+          "id": "c02988cb-e934-447d-ac96-599f1dd62892"
+        },
+        {
+          "command": "runScript",
+          "target": "//SAVEDESC:Assert error message shown (classic/longitudinal mismatch).",
+          "value": "",
+          "id": "83aeba4a-1683-4296-aee2-c0f4e7c9bac9"
+        },
+        {
+          "command": "assertAlert",
+          "target": "${errmsg}",
+          "value": "",
+          "id": "666a9f71-ed90-4b04-b9a4-5426a5159fea"
+        },
+        {
+          "command": "acceptAlert",
+          "target": "",
+          "value": "",
+          "id": "f908b2d0-8db1-4cd9-9c94-95b24c598115"
+        },
+        {
+          "command": "if",
+          "target": "${projtype} == 'C'",
+          "value": "",
+          "id": "1cd9031e-47d6-4d92-93fc-6b4dc2526390"
+        },
+        {
+          "command": "runScript",
+          "target": "$('[name*=\"upload-event\"]').val('')",
+          "value": ".",
+          "id": "b366dabb-dc3b-4a2c-9687-7c066abd50b8"
+        },
+        {
+          "command": "runScript",
+          "target": "//SETDESC:Click \"Classic: repeating form\"",
+          "value": "",
+          "id": "dd9c9cc1-b300-4bc3-a9a0-f8cec764c83e"
+        },
+        {
+          "command": "check",
+          "target": "css=[name*=\"upload-mode\"][value=\"classic-form\"]",
+          "value": "",
+          "id": "8da91728-cadf-4e51-adab-4c985f22018e"
+        },
+        {
+          "command": "else",
+          "target": "",
+          "value": "",
+          "id": "790b22b7-1cce-4cd3-ace0-a131e316d9e2"
+        },
+        {
+          "command": "runScript",
+          "target": "//SETDESC:Click \"Longitudinal: repeating form\"",
+          "value": "",
+          "id": "cd6b3f44-2ff4-4082-a2f0-a7298a938116"
+        },
+        {
+          "command": "check",
+          "target": "css=[name*=\"upload-mode\"][value=\"longitudinal-form\"]",
+          "value": "",
+          "id": "520d2beb-8361-460f-b0b6-4e7fe1ec0ad3"
+        },
+        {
+          "command": "select",
+          "target": "css=[name*=\"upload-event\"]",
+          "value": "value=event_2_arm_1",
+          "id": "90d74b93-2151-48e6-93c7-6784f0f67d05"
+        },
+        {
+          "command": "end",
+          "target": "",
+          "value": "",
+          "id": "51969617-c1ca-44b5-891b-ddd53b9453fc"
+        },
+        {
+          "command": "runScript",
+          "target": "$('#south').remove()",
+          "value": "",
+          "id": "c87d8eb6-07d5-4b17-a3ba-1d0f322d7bb1"
+        },
+        {
+          "command": "click",
+          "target": "css=#external-modules-configure-modal .modal-footer button.save",
+          "value": "",
+          "id": "cf9da713-9ed0-4750-9084-da65f7a63393"
+        },
+        {
+          "command": "waitForElementPresent",
+          "target": "id=south",
+          "value": "30000",
+          "id": "44b00584-ed77-4df6-9caf-02554c14a2ea"
+        },
+        {
+          "command": "click",
+          "target": "linkText=My Projects",
+          "value": "",
+          "id": "60344775-74bd-43bf-ab07-b68e88d180df"
+        },
+        {
+          "command": "end",
+          "target": "",
+          "value": "",
+          "id": "87b61114-3dbb-4afc-aac9-f9fa5ba207b4"
+        }
+      ]
+    },
+    {
+      "id": "9b3f7156-f3cc-4e51-af73-00fe673308f5",
+      "name": "t02 - User access",
+      "commands": [
+        {
+          "command": "open",
+          "target": "/",
+          "value": "",
+          "id": "2fa0d9bd-7e0d-4fa0-be4a-b1e8a4a8aa93"
+        },
+        {
+          "command": "click",
+          "target": "linkText=My Projects",
+          "value": "",
+          "id": "c4131293-83d4-4bcf-b658-ad19833212f3"
+        },
+        {
+          "command": "assertElementPresent",
+          "target": "xpath=//*[@id='table-proj_table'][contains(.,'Data Opt Out Tool Test C')]",
+          "value": "",
+          "id": "63af50cf-07d4-4766-863c-2b674f82cae4"
+        },
+        {
+          "command": "assertElementPresent",
+          "target": "xpath=//*[@id='table-proj_table'][contains(.,'Data Opt Out Tool Test L')]",
+          "value": "",
+          "id": "098a463d-a454-4d1d-a650-6dfba2951b11"
+        },
+        {
+          "command": "executeScript",
+          "target": "return ['C','L']",
+          "value": "projtypes",
+          "id": "15b6bdfd-12af-44b6-b0ed-ff6fdc7f8947"
+        },
+        {
+          "command": "forEach",
+          "target": "projtypes",
+          "value": "projtype",
+          "id": "704894b9-ab4b-4a52-a23d-dcf7fd8b1a0b"
+        },
+        {
+          "command": "executeScript",
+          "target": "return ${projtype} == 'C' ? 'classic' : 'longitudinal'",
+          "value": "projtype_desc",
+          "id": "b5945b7c-9063-4371-ad70-a03d9ecc6269"
+        },
+        {
+          "command": "runScript",
+          "target": "//SAVEDESC:-- Testing ${projtype_desc} project --",
+          "value": "",
+          "id": "6e6fece1-31c0-4806-bdfd-12d27e4144d7"
+        },
+        {
+          "command": "click",
+          "target": "linkText=Data Opt Out Tool Test ${projtype}",
+          "value": "",
+          "id": "c9d16bf6-1e0a-4340-9891-e59825aae34e"
+        },
+        {
+          "command": "executeScript",
+          "target": "return window.location.href",
+          "value": "projpage",
+          "id": "5a7b892a-01bb-4205-8c29-6ee68906ccb3"
+        },
+        {
+          "command": "runScript",
+          "target": "//SAVEDESC:Assert \"Process Opt-Outs\" link available.",
+          "value": "",
+          "id": "ff0e8104-18c4-49db-9df5-d26317336e29"
+        },
+        {
+          "command": "assertElementPresent",
+          "target": "css=a[href*=\"prefix=data_opt_out_tool\"][href*=\"page=process\"]",
+          "value": "",
+          "id": "c70a0005-0474-4d6b-a7d0-b4ce3cac9717"
+        },
+        {
+          "command": "click",
+          "target": "css=a[href*=\"prefix=data_opt_out_tool\"][href*=\"page=process\"]",
+          "value": "",
+          "id": "c19183d4-9e02-45ef-a98e-a1764ecc2c11"
+        },
+        {
+          "command": "runScript",
+          "target": "//SAVEDESC:Assert Process Opt-Outs page loaded.",
+          "value": "",
+          "id": "4de0e06e-0942-4342-b63e-114e64e02720"
+        },
+        {
+          "command": "assertElementPresent",
+          "target": "id=doot-file-input",
+          "value": "",
+          "id": "bb1f4885-2ff6-456b-853a-7f19dced13de"
+        },
+        {
+          "command": "executeScript",
+          "target": "return window.location.href",
+          "value": "dootpage",
+          "id": "62f70501-697a-408f-af9e-309511654bb0"
+        },
+        {
+          "command": "store",
+          "target": "user1",
+          "value": "username",
+          "id": "b904a9f9-8dc1-4bd4-9070-5fd4ab1a06c3"
+        },
+        {
+          "command": "run",
+          "target": "fn switchuser",
+          "value": "",
+          "id": "0b3c3aa5-f0ec-415b-8ebe-1f9003ca5121"
+        },
+        {
+          "command": "runScript",
+          "target": "//SAVEDESC:Assert \"Process Opt-Outs\" link available.",
+          "value": "",
+          "id": "14dec0b5-64f3-4d30-aa6e-b1bc2240448b"
+        },
+        {
+          "command": "assertElementPresent",
+          "target": "css=a[href*=\"prefix=data_opt_out_tool\"][href*=\"page=process\"]",
+          "value": "",
+          "id": "ba706c84-0461-4049-b636-877faf8d3b62"
+        },
+        {
+          "command": "click",
+          "target": "css=a[href*=\"prefix=data_opt_out_tool\"][href*=\"page=process\"]",
+          "value": "",
+          "id": "d4ecf53e-1e58-4c76-8364-b8bb927eb667"
+        },
+        {
+          "command": "runScript",
+          "target": "//SAVEDESC:Assert Process Opt-Outs page loaded.",
+          "value": "",
+          "id": "01f87917-0bcb-4d7e-8442-18f1c6dd9f50"
+        },
+        {
+          "command": "assertElementPresent",
+          "target": "id=doot-file-input",
+          "value": "",
+          "id": "85d67b05-3c2c-42c1-bc57-aabbcfcdb7ea"
+        },
+        {
+          "command": "store",
+          "target": "user2",
+          "value": "username",
+          "id": "08401463-c760-471e-a292-23995491fe67"
+        },
+        {
+          "command": "run",
+          "target": "fn switchuser",
+          "value": "",
+          "id": "8284ea3a-1d0b-4b6b-b7fd-2fcce65abf58"
+        },
+        {
+          "command": "runScript",
+          "target": "//SAVEDESC:Assert \"Process Opt-Outs\" link not available.",
+          "value": "",
+          "id": "4424cb7c-f751-4b67-8043-f705ce496e87"
+        },
+        {
+          "command": "assertElementNotPresent",
+          "target": "css=a[href*=\"prefix=data_opt_out_tool\"][href*=\"page=process\"]",
+          "value": "",
+          "id": "6f8041fb-3def-4b5f-a82d-70192d2e5958"
+        },
+        {
+          "command": "runScript",
+          "target": "//SETDESC:Navigate to Process Opt-Outs page.",
+          "value": "",
+          "id": "2d398e6f-6446-4df3-8ceb-57e47dcff2fe"
+        },
+        {
+          "command": "runScript",
+          "target": "$('#south').remove();window.location = ${dootpage}",
+          "value": "",
+          "id": "60394b8e-5b04-44c7-940c-6523a7ff7bde"
+        },
+        {
+          "command": "pause",
+          "target": "2000",
+          "value": "",
+          "id": "0d26193a-ccfc-4f37-ac21-c015068ea053"
+        },
+        {
+          "command": "type",
+          "target": "css=body",
+          "value": "SAVESCREENSHOT",
+          "id": "f5fd2e5e-b3b1-444b-975d-6ea2468a2a73"
+        },
+        {
+          "command": "runScript",
+          "target": "//SAVEDESC:Assert Process Opt-Outs page not loaded.",
+          "value": "",
+          "id": "2edd5228-a1d1-4018-8185-310bb6565351"
+        },
+        {
+          "command": "assertElementNotPresent",
+          "target": "id=doot-file-input",
+          "value": "",
+          "id": "5dc7da0b-cc4d-49b8-96a4-0af076cba83d"
+        },
+        {
+          "command": "runScript",
+          "target": "window.location = ${projpage}",
+          "value": "",
+          "id": "5dbbbed3-3cf8-43cf-9687-44fdca551ed9"
+        },
+        {
+          "command": "waitForElementPresent",
+          "target": "id=south",
+          "value": "30000",
+          "id": "7bc9866f-1801-4dfc-b71c-3bac4e4aa326"
+        },
+        {
+          "command": "store",
+          "target": "admin",
+          "value": "username",
+          "id": "592190a0-aca8-409b-9651-b3253563ee17"
+        },
+        {
+          "command": "run",
+          "target": "fn switchuser",
+          "value": "",
+          "id": "1a8505ff-0f0a-480d-bc5c-7388455aed80"
+        },
+        {
+          "command": "click",
+          "target": "linkText=My Projects",
+          "value": "",
+          "id": "d7fa8fe6-537d-4ad6-a877-845c4c1df7e7"
+        },
+        {
+          "command": "end",
+          "target": "",
+          "value": "",
+          "id": "11921399-d673-483e-af79-f2c0d5cc703d"
+        }
+      ]
+    },
+    {
+      "id": "691731fb-1df5-4831-aec5-2b7f8727ca07",
+      "name": "t03 - File upload",
+      "commands": [
+        {
+          "id": "0ae354b9-a0a7-4c21-868a-da64cc2fb498",
+          "command": "open",
+          "target": "/",
+          "value": ""
+        },
+        {
+          "command": "click",
+          "target": "linkText=My Projects",
+          "value": "",
+          "id": "1b496a86-bfe6-4a45-b5d4-8b7d17f89c35"
+        },
+        {
+          "command": "assertElementPresent",
+          "target": "xpath=//*[@id='table-proj_table'][contains(.,'Data Opt Out Tool Test C')]",
+          "value": "",
+          "id": "ad21cd65-918c-491d-8c0d-f9770920b5b3"
+        },
+        {
+          "command": "assertElementPresent",
+          "target": "xpath=//*[@id='table-proj_table'][contains(.,'Data Opt Out Tool Test L')]",
+          "value": "",
+          "id": "bb00f982-d904-4d4a-a6c2-2bd46f9b8a01"
+        },
+        {
+          "command": "executeScript",
+          "target": "return '1\\n2\\n3'",
+          "value": "list1",
+          "id": "7e2e8cb8-1985-49ae-9377-d35dcf9f9026"
+        },
+        {
+          "command": "executeScript",
+          "target": "return '4\\n5\\n6'",
+          "value": "list2",
+          "id": "1c19c509-e0d4-4c88-81cf-fcb110a6921e"
+        },
+        {
+          "command": "executeScript",
+          "target": "return '7\\n8\\n9'",
+          "value": "list3",
+          "id": "8dc5b6da-4609-49d3-8a96-a9880dc343c6"
+        },
+        {
+          "command": "store",
+          "target": "user1",
+          "value": "username",
+          "id": "b508aa4e-54df-4bd3-9105-61ed230350e8"
+        },
+        {
+          "command": "run",
+          "target": "fn switchuser",
+          "value": "",
+          "id": "0d4c884d-3dec-4be0-ace2-53ac4fc7a42f"
+        },
+        {
+          "command": "executeScript",
+          "target": "return ['C','L']",
+          "value": "projtypes",
+          "id": "c9016555-e0b5-44f5-8acc-9fa8ce3da436"
+        },
+        {
+          "command": "forEach",
+          "target": "projtypes",
+          "value": "projtype",
+          "id": "2709e26e-3634-4e7d-96d5-a9d0f98015d5"
+        },
+        {
+          "command": "executeScript",
+          "target": "return ${projtype} == 'C' ? 'classic' : 'longitudinal'",
+          "value": "projtype_desc",
+          "id": "e37573a8-6ace-4134-aaf7-5b46637d3dec"
+        },
+        {
+          "command": "runScript",
+          "target": "//SAVEDESC:-- Testing ${projtype_desc} project --",
+          "value": "",
+          "id": "0e0f8a88-603b-4675-863e-cdae5d10ae80"
+        },
+        {
+          "command": "click",
+          "target": "linkText=Data Opt Out Tool Test ${projtype}",
+          "value": "",
+          "id": "d069460c-916f-47b3-9114-901ff9e9a83c"
+        },
+        {
+          "command": "click",
+          "target": "css=a[href*=\"DataEntry/record_status_dashboard.php\"]",
+          "value": "",
+          "id": "4402820a-2b39-4922-9ad6-5f6b6d77815b"
+        },
+        {
+          "command": "click",
+          "target": "css=button[onclick*=\"DataEntry/record_home.php\"]",
+          "value": "",
+          "id": "447f59f5-35e4-4d1f-b9b1-869a64384385"
+        },
+        {
+          "command": "click",
+          "target": "css=#event_grid_table a[href*=\"DataEntry/index.php\"][href*=\"page=demographics\"]",
+          "value": "",
+          "id": "f5168891-d931-434b-9a58-774a2a0eaee0"
+        },
+        {
+          "command": "type",
+          "target": "name=first_name",
+          "value": "Hello",
+          "id": "69fed40b-193e-424d-914d-96e5958d4850"
+        },
+        {
+          "command": "type",
+          "target": "name=last_name",
+          "value": "World",
+          "id": "17c2483a-6298-4a16-81ad-fe4ff7e07e78"
+        },
+        {
+          "command": "click",
+          "target": "id=submit-btn-saverecord",
+          "value": "",
+          "id": "43bbe76e-d182-4b1b-ae9f-2ec27ee3b62f"
+        },
+        {
+          "command": "click",
+          "target": "css=a[href*=\"prefix=data_opt_out_tool\"][href*=\"page=process\"]",
+          "value": "",
+          "id": "f26e1f51-7427-49e7-9c35-643dcae0a2a1"
+        },
+        {
+          "command": "executeScript",
+          "target": "return [{id:'1',ex:${list1},in:''},{id:'2',ex:'',in:${list2}},{id:'3',ex:${list1},in:${list3}}]",
+          "value": "uploads",
+          "id": "2be0ab4e-4106-43d2-9f98-b89479916f5a"
+        },
+        {
+          "command": "forEach",
+          "target": "uploads",
+          "value": "upload",
+          "id": "65fdec44-fe13-4e2d-a739-9c016ff43a4a"
+        },
+        {
+          "command": "executeScript",
+          "target": "return ${upload}.ex",
+          "value": "upload_ex",
+          "id": "9446dd32-a3d9-46c3-ba31-53cd8c6c9363"
+        },
+        {
+          "command": "executeScript",
+          "target": "return ${upload}.in",
+          "value": "upload_in",
+          "id": "d6ebc8ee-6324-4946-9083-2bf0d767e8e2"
+        },
+        {
+          "command": "executeScript",
+          "target": "return ''+(Math.floor((${upload_in}+'.').length/2) == 0 ? Math.floor((${upload_ex}+'.').length/2) : (9-Math.floor((${upload_in}+'.').length/2)))",
+          "value": "removed",
+          "id": "425ec0e4-ea9b-4f17-a98e-440741f681fd"
+        },
+        {
+          "command": "executeScript",
+          "target": "return ''+(9 - ${removed})",
+          "value": "remain",
+          "id": "a6893ba6-86f7-4ce7-b5d3-625b8273487f"
+        },
+        {
+          "command": "type",
+          "target": "id=doot-file-input",
+          "value": "REPODIR/tests/testdata.csv",
+          "id": "c6a09d43-14c7-410d-b84f-240205a56e05"
+        },
+        {
+          "command": "type",
+          "target": "id=doot-header-row",
+          "value": "2",
+          "id": "8f5d838c-f006-48db-a978-80be7cb75a4c"
+        },
+        {
+          "command": "runScript",
+          "target": "document.getElementById('doot-header-row').dispatchEvent(new Event('input'))",
+          "value": "",
+          "id": "97e2a350-6eb3-40a9-af5d-bd2f02ea0a35"
+        },
+        {
+          "command": "assertText",
+          "target": "id=doot-header-preview",
+          "value": "Columns found: 1 • 2025-01-01 • 5634 • hiuelrhic",
+          "id": "55f63680-c3ee-4782-8524-a36dbdf0a89b"
+        },
+        {
+          "command": "type",
+          "target": "id=doot-header-row",
+          "value": "1",
+          "id": "a75f36a9-a2e1-494e-a60a-ee1575af1157"
+        },
+        {
+          "command": "runScript",
+          "target": "document.getElementById('doot-header-row').dispatchEvent(new Event('input'))",
+          "value": "",
+          "id": "25e586c7-3bf6-4106-8bab-f0b95226d790"
+        },
+        {
+          "command": "assertText",
+          "target": "id=doot-header-preview",
+          "value": "Columns found: id • date • num • text",
+          "id": "e8fefa2d-714d-4305-bfe4-0a868279f91e"
+        },
+        {
+          "command": "click",
+          "target": "id=doot-step1-next",
+          "value": "",
+          "id": "d8ebf35c-0bfb-4afd-850e-6fd5e346726b"
+        },
+        {
+          "command": "select",
+          "target": "id=doot-id-column",
+          "value": "label=id",
+          "id": "1eb25159-c91e-482b-899d-cceea10476a2"
+        },
+        {
+          "command": "click",
+          "target": "id=doot-step2-next",
+          "value": "",
+          "id": "abb694b3-6548-42a4-be61-4c4186e5ec46"
+        },
+        {
+          "command": "type",
+          "target": "id=doot-exclude",
+          "value": "${upload_ex}",
+          "id": "bdd07d48-d875-4c9b-a8eb-9d849041bf3d"
+        },
+        {
+          "command": "type",
+          "target": "id=doot-include",
+          "value": "${upload_in}",
+          "id": "fdea23ce-5080-4827-8f00-74a2f55bcf24"
+        },
+        {
+          "command": "click",
+          "target": "id=doot-process-btn",
+          "value": "",
+          "id": "3870306d-8a05-45c3-996b-4ff4d7ae714c"
+        },
+        {
+          "command": "waitForElementVisible",
+          "target": "id=doot-record-select",
+          "value": "30000",
+          "id": "1795e62a-85ac-457f-a8b7-a0e2d8ed4e11"
+        },
+        {
+          "command": "pause",
+          "target": "500",
+          "value": "",
+          "id": "e4a01111-76ee-4128-bebd-9c0b50117962"
+        },
+        {
+          "command": "runScript",
+          "target": "//SETDESC:Assert correct number of rows removed/remain",
+          "value": "",
+          "id": "94584c18-360e-47d1-92c2-2551595cbd50"
+        },
+        {
+          "command": "type",
+          "target": "id=doot-results-msg",
+          "value": "SAVESCREENSHOT",
+          "id": "b1b06d63-58cd-4862-a38e-65735cae8579"
+        },
+        {
+          "command": "assertText",
+          "target": "id=doot-results-msg",
+          "value": "${removed} row(s) removed. ${remain} row(s) remain.",
+          "id": "2f3ee95f-2166-453c-8f01-22fde82c7e3d"
+        },
+        {
+          "command": "select",
+          "target": "id=doot-record-select",
+          "value": "value=1",
+          "id": "d4af75f2-7a24-4653-816c-8a3ff8dd9a36"
+        },
+        {
+          "command": "click",
+          "target": "id=doot-upload-btn",
+          "value": "",
+          "id": "5546e868-70d9-42dc-af5d-961b2c3967a4"
+        },
+        {
+          "command": "waitForElementVisible",
+          "target": "id=doot-restart-btn",
+          "value": "30000",
+          "id": "b267297c-3071-48ae-85a2-07d97ed3b426"
+        },
+        {
+          "command": "click",
+          "target": "id=doot-restart-btn",
+          "value": "",
+          "id": "a1b9c4e0-8186-4154-82fa-6960af34cd35"
+        },
+        {
+          "command": "end",
+          "target": "",
+          "value": "",
+          "id": "b3a3e637-462c-4273-8832-44f8f3e9acc0"
+        },
+        {
+          "command": "forEach",
+          "target": "uploads",
+          "value": "upload",
+          "id": "54dc511a-8bb8-4c73-bff6-96dee332fc33"
+        },
+        {
+          "command": "executeScript",
+          "target": "return ${upload}.id",
+          "value": "upload_id",
+          "id": "17c51572-4926-44bd-a785-18c29c0abfdd"
+        },
+        {
+          "command": "click",
+          "target": "css=a[href*=\"DataEntry/record_status_dashboard.php\"]",
+          "value": "",
+          "id": "e6fdd3cf-af40-4f93-aa05-ef7aa7bd1fc2"
+        },
+        {
+          "command": "runScript",
+          "target": "//SETDESC:Click \"Upload\" (show instances)",
+          "value": "",
+          "id": "19fd2ae6-dbbd-40e7-84cd-2561306b855a"
+        },
+        {
+          "command": "click",
+          "target": "css=a[onclick*=\"showFormInstanceSelector\"]",
+          "value": "",
+          "id": "c0f5026d-92aa-4918-9086-9dcbfb7335b4"
+        },
+        {
+          "command": "runScript",
+          "target": "//SETDESC:Click \"Instance ${upload_id}\"",
+          "value": "",
+          "id": "1fc677cb-7f84-4d8a-b4f1-992785985241"
+        },
+        {
+          "command": "click",
+          "target": "css=a[href*=\"DataEntry/index.php\"][href*=\"page=upload\"][href*=\"instance=${upload_id}\"]",
+          "value": "",
+          "id": "f45e2a77-c46d-4528-90e2-87b1fc96fd13"
+        },
+        {
+          "command": "executeAsyncScript",
+          "target": "var cb=arguments[arguments.length-1];$.get($('#upload_file-link').attr('href'),function(d){cb(d)})",
+          "value": "upload_data",
+          "id": "2649da70-cf2a-4aa0-ac98-ed83ae6711ec"
+        },
+        {
+          "command": "runScript",
+          "target": "//SETDESC:Assert data correct",
+          "value": "",
+          "id": "0c667348-b1f5-4c0e-bba6-dfd4b8580f1f"
+        },
+        {
+          "command": "runScript",
+          "target": "simpleDialog('<span id=\"uploadedfiledata\">'+(${upload_data}.replace(/\\n/g,'<br>'))+'</span>','Uploaded data')",
+          "value": "",
+          "id": "2fd9096a-7944-484a-9275-36589202d96b"
+        },
+        {
+          "command": "type",
+          "target": "id=uploadedfiledata",
+          "value": "SAVESCREENSHOT",
+          "id": "a7286770-b99e-45b9-9973-ffb23dfc79eb"
+        },
+        {
+          "command": "executeScript",
+          "target": "return (${upload_data}.indexOf('\\n1,')==-1 && ${upload_data}.indexOf('\\n2,')==-1 && ${upload_data}.indexOf('\\n3,')==-1 && (${upload_id} == '3' ? (${upload_data}.indexOf('\\n4,')==-1 && ${upload_data}.indexOf('\\n5,')==-1 && ${upload_data}.indexOf('\\n6,')==-1) : (${upload_data}.indexOf('\\n4,')!=-1 && ${upload_data}.indexOf('\\n5,')!=-1 && ${upload_data}.indexOf('\\n6,')!=-1)) && (${upload_id} == '2' ? (${upload_data}.indexOf('\\n7,')==-1 && ${upload_data}.indexOf('\\n8,')==-1 && ${upload_data}.indexOf('\\n9,')==-1) : (${upload_data}.indexOf('\\n7,')!=-1 && ${upload_data}.indexOf('\\n8,')!=-1 && ${upload_data}.indexOf('\\n9,')!=-1)) ) ? '1' : '0'",
+          "value": "upload_valid",
+          "id": "ae53245e-d162-4312-a419-28d46838a693"
+        },
+        {
+          "command": "assert",
+          "target": "upload_valid",
+          "value": "1",
+          "id": "3da45f26-0fac-4d7a-8687-e520428eb8a7"
+        },
+        {
+          "command": "click",
+          "target": "css=button.close-button",
+          "value": "",
+          "id": "e7344ce7-9645-4ca8-82dc-b643ac259ab2"
+        },
+        {
+          "command": "end",
+          "target": "",
+          "value": "",
+          "id": "2d7f0772-2e47-4d06-8c10-720441857d06"
+        },
+        {
+          "command": "click",
+          "target": "linkText=My Projects",
+          "value": "",
+          "id": "982cf10d-0254-424a-8450-b15d117a71f1"
+        },
+        {
+          "command": "end",
+          "target": "",
+          "value": "",
+          "id": "694772fe-897d-46db-a44d-0d654278c88c"
+        }
+      ]
+    }
+  ],
+  "snapshot": {
+    "dependencies": {},
+    "tests": [],
+    "jest": {
+      "extraGlobals": []
+    }
+  }
+}
