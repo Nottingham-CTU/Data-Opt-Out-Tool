@@ -6,6 +6,15 @@ use Nottingham\DataOptOutTool\DataOptOutTool;
 $module->initializeJavascriptModuleObject();
 $jsModuleName = $module->getJavascriptModuleObjectName();
 
+$excludeColumnMode = $module->getProjectSetting('exclude-columns');
+$listExcludeColumns = $excludeColumnMode != ''
+                      ? $module->getProjectSetting('exclude-column') : [];
+$listExcludeColumns = json_encode( $listExcludeColumns, JSON_UNESCAPED_SLASHES );
+$listExcludeColumns = json_encode( $listExcludeColumns, JSON_HEX_QUOT | JSON_HEX_APOS |
+                                                        JSON_HEX_TAG | JSON_HEX_AMP |
+                                                        JSON_UNESCAPED_SLASHES );
+$listExcludeColumns = '"' . $module->escape( substr( $listExcludeColumns, 1, -1 ) ) . '"';
+
 $instructionText = $module->escape( $module->getProjectSetting('instruction-text') );
 $instructionText = preg_replace( '!&lt;(?:(?<t1>a)( href=&quot;(?(?=&quot;)|.)*&quot;)' .
                                  '(?: target=&quot;_blank&quot;)?|(?<t2>b|i))&gt;((?(?=&lt;/' .
@@ -139,5 +148,7 @@ $instructionStyle .= '; border-radius: 5px; margin: 25px 0; padding: 7px; displa
 <script type="text/javascript">
     $('#center').css('padding-right','20px')
     window.dootModule = <?= $jsModuleName ?>;
+    window.dootExcludeColumnMode = '<?= $excludeColumnMode ?>';
+    window.dootExcludeColumns = JSON.parse(<?= $listExcludeColumns ?>);
 </script>
 <script type="text/javascript" src="<?= $module->getUrl('process.js') ?>"></script>

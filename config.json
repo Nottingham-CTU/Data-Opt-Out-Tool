@@ -123,6 +123,29 @@
           }
         }
       ]
+    },
+    {
+      "key": "hdr-filter-data",
+      "name": "<br><b>Data Filters</b>",
+      "type": "descriptive"
+    },
+    {
+      "key": "exclude-columns",
+      "name": "Exclude columns from data file",
+      "type": "radio",
+      "choices": [
+        { "value": "", "name": "Don't exclude columns" },
+        { "value": "H", "name": "Exclude columns matching specified header names" },
+        { "value": "R", "name": "Exclude columns with headers matching regular expressions" }
+      ]
+    },
+    {
+      "key": "exclude-column",
+      "name": "Column to exclude",
+      "required": true,
+      "type": "text",
+      "repeatable" : true,
+      "branchingLogic" : { "field" : "exclude-columns", "value" : "", "op" : "<>" }
     }
   ],
   "links": {
