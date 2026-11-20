@@ -135,8 +135,8 @@
       "type": "radio",
       "choices": [
         { "value": "", "name": "Don't exclude columns" },
-        { "value": "H", "name": "Exclude columns matching specified header names" },
-        { "value": "R", "name": "Exclude columns with headers matching regular expressions" }
+        { "value": "H", "name": "Headers matching specified names" },
+        { "value": "R", "name": "Headers matching regular expressions" }
       ]
     },
     {
@@ -145,7 +145,13 @@
       "required": true,
       "type": "text",
       "repeatable" : true,
-      "branchingLogic" : { "field" : "exclude-columns", "value" : "", "op" : "<>" }
+      "branchingLogic" : {
+            "type": "or",
+            "conditions": [
+              { "field": "exclude-columns", "value": "H" },
+              { "field": "exclude-columns", "value": "R" }
+            ]
+          }
     }
   ],
   "links": {
