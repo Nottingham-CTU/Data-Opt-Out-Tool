@@ -57,7 +57,7 @@ document.getElementById('doot-step1-next').addEventListener('click', () => {
         {
             for ( let j = 0; j < projectExcludeColumns.length; j++ )
             {
-                if ( new RegExp( projectExcludeColumns[j] ).test( rawRows[headerRowIdx][i] ) )
+                if ( new RegExp( projectExcludeColumns[j], 'i' ).test( rawRows[headerRowIdx][i] ) )
                 {
                     excludedColumns.push(i);
                     break;
@@ -66,9 +66,14 @@ document.getElementById('doot-step1-next').addEventListener('click', () => {
         }
         else
         {
-            if ( projectExcludeColumns.indexOf( rawRows[headerRowIdx][i] ) != -1 )
+            for ( let j = 0; j < projectExcludeColumns.length; j++ )
             {
-                excludedColumns.push(i);
+                if ( rawRows[headerRowIdx][i].toLowerCase() ==
+                     projectExcludeColumns[j].toLowerCase() )
+                {
+                    excludedColumns.push(i);
+                    break;
+                }
             }
         }
     }
