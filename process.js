@@ -125,12 +125,17 @@ document.getElementById('doot-process-btn').addEventListener('click', () => {
     filteredRows = [rawRows[headerRowIdx]].concat(filtered);
 
     // Remove excluded columns
+    let removedColumns = []
     excludedColumns.sort().reverse()
     for ( let i = 0; i < filteredRows.length; i++ )
     {
         for ( let j = 0; j < excludedColumns.length; j++ )
         {
-            filteredRows[i].splice( excludedColumns[j], 1 )
+            let removedCol = filteredRows[i].splice( excludedColumns[j], 1 )
+            if ( i == headerRowIdx )
+            {
+                removedColumns.push( removedCol )
+            }
         }
     }
 
@@ -138,6 +143,10 @@ document.getElementById('doot-process-btn').addEventListener('click', () => {
     msg.innerHTML =
         `<strong>${escapeHtml(removed)}</strong> row(s) removed. ` +
         `<strong>${escapeHtml(remaining)}</strong> row(s) remain.`;
+    if ( removedColumns.length > 0 )
+    {
+        msg.innerHTML += '<br>Removed columns: ' + escapeHtml( removedColumns.join(', ') ) + '.'
+    }
 
     processedCsv = serialiseCsv(filteredRows);
 
