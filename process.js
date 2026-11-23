@@ -122,7 +122,7 @@ document.getElementById('doot-process-btn').addEventListener('click', () => {
     const remaining = filtered.length;
 
     // Prepend header row
-    filteredRows = [rawRows[headerRowIdx]].concat(filtered);
+    filteredRows = [rawRows[headerRowIdx]].concat(filtered).map( row => row.slice() );
 
     // Remove excluded columns
     let removedColumns = []
@@ -132,7 +132,7 @@ document.getElementById('doot-process-btn').addEventListener('click', () => {
         for ( let j = 0; j < excludedColumns.length; j++ )
         {
             let removedCol = filteredRows[i].splice( excludedColumns[j], 1 )
-            if ( i == headerRowIdx )
+            if ( i == 0 )
             {
                 removedColumns.push( removedCol )
             }
