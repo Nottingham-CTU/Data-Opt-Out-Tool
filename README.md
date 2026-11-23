@@ -114,4 +114,5 @@ Configures any data which should always be filtered out prior to upload.
 - **Exclude columns from data file**<br>
   This option allows columns to be identified by column name (from the user-selected header row) and
   excluded from the data file during the processing prior to upload. Columns can be matched either
-  by an exact match on the header name, or by a regular expression match on the header name.
+  by an exact match on the header name, or by a regular expression match on the header name.<br>
+  *Note: If using regular expressions, do not include `/` delimiters.*
