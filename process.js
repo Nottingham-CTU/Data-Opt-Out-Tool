@@ -1,12 +1,15 @@
 const module = window.dootModule;
+const projectExcludeColumnMode = window.dootExcludeColumnMode;
+const projectExcludeColumns = window.dootExcludeColumns;
 
 // State
-let rawRows      = [];   // All parsed rows (arrays of strings)
-let filteredRows = [];   // Rows after processing (including header)
-let headerRowIdx = 0;    // 0-based index into rawRows
-let colIdx       = 0;    // 0-based column index for identifier
+let rawRows      = [];    // All parsed rows (arrays of strings)
+let filteredRows = [];    // Rows after processing (including header)
+let headerRowIdx = 0;     // 0-based index into rawRows
+let colIdx       = 0;     // 0-based column index for identifier
 let csvFilename  = 'processed.csv';
-let processedCsv = ''; // Serialized CSV text after processing
+let processedCsv = '';    // Serialized CSV text after processing
+let excludedColumns = []; // Column indexes to exclude
 
 // Event listeners
 
@@ -46,6 +49,34 @@ document.getElementById('doot-step1-next').addEventListener('click', () => {
         return;
     }
     populateColumnDropdown();
+    // Find the columns to be excluded in the upload.
+    excludedColumns = [];
+    for ( let i = 0; i < rawRows[headerRowIdx].length; i++ )
+    {
+        if ( projectExcludeColumnMode == 'R' )
+        {
+            for ( let j = 0; j < projectExcludeColumns.length; j++ )
+            {
+                if ( new RegExp( projectExcludeColumns[j], 'i' ).test( rawRows[headerRowIdx][i] ) )
+                {
+                    excludedColumns.push(i);
+                    break;
+                }
+            }
+        }
+        else
+        {
+            for ( let j = 0; j < projectExcludeColumns.length; j++ )
+            {
+                if ( rawRows[headerRowIdx][i].toLowerCase() ==
+                     projectExcludeColumns[j].toLowerCase() )
+                {
+                    excludedColumns.push(i);
+                    break;
+                }
+            }
+        }
+    }
     showStep(2);
 });
 
@@ -91,12 +122,31 @@ document.getElementById('doot-process-btn').addEventListener('click', () => {
     const remaining = filtered.length;
 
     // Prepend header row
-    filteredRows = [rawRows[headerRowIdx]].concat(filtered);
+    filteredRows = [rawRows[headerRowIdx]].concat(filtered).map( row => row.slice() );
+
+    // Remove excluded columns
+    let removedColumns = []
+    excludedColumns.sort().reverse()
+    for ( let i = 0; i < filteredRows.length; i++ )
+    {
+        for ( let j = 0; j < excludedColumns.length; j++ )
+        {
+            let removedCol = filteredRows[i].splice( excludedColumns[j], 1 )
+            if ( i == 0 )
+            {
+                removedColumns.push( removedCol )
+            }
+        }
+    }
 
     const msg = document.getElementById('doot-results-msg');
     msg.innerHTML =
         `<strong>${escapeHtml(removed)}</strong> row(s) removed. ` +
         `<strong>${escapeHtml(remaining)}</strong> row(s) remain.`;
+    if ( removedColumns.length > 0 )
+    {
+        msg.innerHTML += '<br>Removed columns: ' + escapeHtml( removedColumns.join(', ') ) + '.'
+    }
 
     processedCsv = serialiseCsv(filteredRows);
 
